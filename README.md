@@ -1,3 +1,3 @@
 # Sorcery
 
-A description of this package.
+Helpers for iOS App development.
