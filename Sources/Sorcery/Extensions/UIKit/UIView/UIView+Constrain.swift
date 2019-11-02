@@ -29,7 +29,7 @@ extension CGSize {
     ///   - height: height
     /// - Returns: New CGSize
     /// Eg. CGSize.size(height: 42) > CGSize(width: 0, height: 42)
-    static func size(
+    public static func size(
         width: CGFloat = 0.0,
         height: CGFloat = 0.0
     ) -> CGSize {
@@ -50,7 +50,7 @@ extension UIEdgeInsets {
     /// Eg. UIEdgeInsets.padding(top: 8, right: 16) > UIEdgeInsets(top 8, left: 0, bottom: 0, right: 16)
     /// Eg. UIEdgeInsets.padding(horizontal: 16) > UIEdgeInsets(top 0, left: 16, bottom: 0, right: 16)
     ///
-    static func insets(
+    public static func insets(
         top: CGFloat = 0.0,
         left: CGFloat = 0.0,
         bottom: CGFloat = 0.0,
@@ -99,7 +99,7 @@ extension UIView {
     ///    centerX, top, width, height
     ///
     @discardableResult
-    func constrain(
+    public func constrain(
         activate: Bool = true,
 
         top: NSLayoutYAxisAnchor? = nil,
@@ -210,7 +210,7 @@ extension UIView {
     }
 
     @discardableResult
-    func constrain(
+    public func constrain(
         activate: Bool = true,
         to: UIView,
         padding: UIEdgeInsets = .zero
@@ -225,14 +225,14 @@ extension UIView {
         )
     }
 
-    func removeAll() {
+    public func removeAll() {
         for subview in self.subviews {
             subview.removeConstraints()
             subview.removeFromSuperview()
         }
     }
 
-    func removeConstraints() {
+    public func removeConstraints() {
         let constraints = self.superview?.constraints.filter {
             $0.firstItem as? UIView == self || $0.secondItem as? UIView == self
         } ?? []
