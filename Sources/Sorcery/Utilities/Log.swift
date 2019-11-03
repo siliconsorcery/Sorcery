@@ -23,6 +23,7 @@ import UIKit
 public enum Log {
 
     public enum Output {
+        case echo
         case console
         case server
         case serverAndConsole
@@ -47,10 +48,11 @@ public enum Log {
 //            let outputMessage = "\(dateString) \(userId) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] \(deviceId ?? "No Device")"
 //            // BOGUS: Server writes needs work!
 //            print(outputMessage)
-        }
-
-        if (output == .console || output == .serverAndConsole) {
+        } else if (output == .console || output == .serverAndConsole) {
             let outputMessage = "\(dateString) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] "
+            print(outputMessage)
+        } else if (output == .echo) {
+            let outputMessage = "\(dateString) \(message)"
             print(outputMessage)
         }
     }
@@ -176,4 +178,21 @@ public enum Log {
 
         Alert.show(title: "Sorry!", message: "\(message)")
     }
+    
+    public static func echo(
+        _ message: String = "",
+        to output: Output? = .echo,
+        funcName: String = #function,
+        fileName: String = #file,
+        lineNumber: Int = #line
+    ) {
+        event(
+            "🎲 - \(message)",
+            to: output,
+            funcName: funcName,
+            fileName: fileName,
+            lineNumber: lineNumber
+        )
+    }
+
 }
