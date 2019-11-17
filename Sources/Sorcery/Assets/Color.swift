@@ -9,7 +9,7 @@
 import UIKit
 
 /// Lossely based on MaterialColors and subdividing the spectrum
-public enum Color {
+public enum SorceryColor {
     
     static let clear = UIColor.clear
 

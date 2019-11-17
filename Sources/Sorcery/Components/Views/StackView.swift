@@ -13,7 +13,7 @@ class StackView: UIStackView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
 
-        tintColor = Color.blue.shift(lightness: -0.25)
+        tintColor = SorceryColor.blue.shift(lightness: -0.25)
 
         axis = .vertical
         alignment = .fill
