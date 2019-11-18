@@ -1,6 +1,11 @@
 # Sorcery
 
-Helpers for iOS App development.
+Helpers for iOS App development for UIKit and SwiftUI.
+
+## 0.0.5
+
+* Add EdgeReveal View
+* Add support for SwiftUI
 
 ## 0.0.4
 
