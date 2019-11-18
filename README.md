@@ -2,6 +2,10 @@
 
 Helpers for iOS App development.
 
+## 0.0.4
+
+* Change 'Color' to 'SorceryColor' as 'Color' conflicts with SwiftUI.Color
+
 ## 0.0.3
 
 * Add Log.echo
