@@ -2,6 +2,10 @@
 
 Helpers for iOS App development for UIKit and SwiftUI.
 
+## 0.0.6
+
+* Add Picon View
+
 ## 0.0.5
 
 * Add EdgeReveal View
