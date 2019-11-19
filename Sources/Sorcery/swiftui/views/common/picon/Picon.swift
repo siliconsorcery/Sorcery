@@ -1,9 +1,9 @@
 //
 //  Picon.swift
-//  FireList_SwiftUI
+//  Sorcery
 //
 //  Created by John Cumming on 11/16/19.
-//  Copyright © 2019 Booth Hill Software, Inc. All rights reserved.
+//  Copyright © Silicon Sorcery. All rights reserved.
 //
 
 import SwiftUI

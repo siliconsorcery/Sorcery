@@ -2,6 +2,11 @@
 
 Helpers for iOS App development for UIKit and SwiftUI.
 
+## New
+
+* Add Fab View
+* Add Card View
+
 ## 0.0.6
 
 * Add Picon View

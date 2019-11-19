@@ -96,13 +96,12 @@ extension UIColor {
             hexString.remove(at: hexString.startIndex)
         }
         let scanner = Scanner(string: hexString)
-        var hexEquivalent: UInt32 = 0
+        var hexEquivalent: UInt64 = 0
 
-        if !scanner.scanHexInt32(&hexEquivalent) {
+        if !scanner.scanHexInt64(&hexEquivalent) {
             assertionFailure("hexString did not contain a valid hex value")
         }
-
-        self.init(hex: hexEquivalent, alpha: alpha)
+        self.init(hex: UInt32(hexEquivalent), alpha: alpha)
     }
 
     /**
