@@ -3,7 +3,7 @@
 //  Core
 //
 //  Created by John Cumming on 2/27/18.
-//  Copyright © 2019 Silicon Sorcery. All rights reserved.
+//  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
 import Foundation

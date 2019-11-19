@@ -4,6 +4,11 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.9
+
+- Refactored EdgeReveal to use an EnvironmentObject (EdgeRevealModel) for state
+- Update Copyright info and include MIT license link
+
 ## 0.0.8
 
 - Move repo to BitBucket

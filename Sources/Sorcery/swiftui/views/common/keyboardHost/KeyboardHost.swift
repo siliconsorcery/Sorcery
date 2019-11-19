@@ -3,7 +3,7 @@
 //  Sorcery
 //
 //  Created by John Cumming on 11/12/19.
-//  Copyright © 2019 Silicon Sorcery. All rights reserved.
+//  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 //  See: Benjamin Kindle answer Jul 27, 2019 at 18:42
 //  https://stackoverflow.com/questions/56491881/move-textfield-up-when-thekeyboard-has-appeared-by-using-swiftui-ios
