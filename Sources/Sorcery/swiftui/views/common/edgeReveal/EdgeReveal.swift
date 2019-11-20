@@ -16,7 +16,7 @@ public struct EdgeReveal<Content: View>: View {
         
         let offset = closed + delta() * CGFloat(progress)
                 
-        return GeometryReader { _ in
+        return Stack(.topLeading) {
             // Fade background
             Color
             .black
@@ -29,6 +29,7 @@ public struct EdgeReveal<Content: View>: View {
                 }
             )
             
+            
             Group {
                 // Edge trigger
                 Color
@@ -36,12 +37,24 @@ public struct EdgeReveal<Content: View>: View {
                 .opacity(0.001)
                 .frame(width: self.triggerXSize)
                 .offset(x: self.triggerX)
+                .gesture(
+                    TapGesture()
+                        .onEnded { _ in
+                            self.reveal.toggle(self.edge)
+                    }
+                )
+                
+                // Shadow
+                Color.white
+                .frame(width: self.width)
+                .offset(x: offset)
+                .shadow(radius: 4)
 
                 // Content
                 self.content
                 .frame(width: self.width)
                 .offset(x: offset)
-                .shadow(radius: 4)
+//                .shadow(radius: 4) // BOGUS: This will cause gestures in scrolView or List to fail!
             }
             .gesture(
                 DragGesture()
@@ -62,12 +75,6 @@ public struct EdgeReveal<Content: View>: View {
                     )
 
                 }
-//                .simultaneously(
-//                    with: TapGesture()
-//                    .onEnded {
-//                        self.reveal.toggle(self.edge)
-//                    }
-//                )
             )
         }
         .animation(.spring())
@@ -219,7 +226,7 @@ struct EdgeReveal_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ZStack {
+        Stack {
             Color.green
 
             EdgeReveal { Color.red }

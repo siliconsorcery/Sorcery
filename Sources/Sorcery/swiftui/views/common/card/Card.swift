@@ -11,14 +11,14 @@ import SwiftUI
 public struct Card: View {
 
     public var body: some View {
-        VStack {
+        Column {
             Image(props.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .background(Color.yellow)
          
-            HStack {
-                VStack(alignment: .leading) {
+            Row(.leading) {
+                Column(.leading) {
                     Text(props.category)
                         .font(.headline)
                         .foregroundColor(.secondary)
@@ -34,28 +34,26 @@ public struct Card: View {
                         .foregroundColor(.secondary)
                 }
                 .layoutPriority(100)
-         
-                Spacer()
             }
             .padding()
         }
         .contextMenu {
             Button(action: { Log.task() }) {
-                HStack {
+                Row {
                     Text("One")
                     Image(systemName: "paperplane")
                 }
             }
             
             Button(action: { Log.task() }) {
-                HStack {
+                Row {
                     Image(systemName: "tray")
                     Text("Two")
                 }
             }
             
             Button(action: { Log.task() }) {
-                HStack {
+                Row {
                     Text("Three")
                     Image(systemName: "folder")
                 }

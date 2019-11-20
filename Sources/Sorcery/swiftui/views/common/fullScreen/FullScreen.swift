@@ -11,9 +11,9 @@ import SwiftUI
 public struct FullScreen<Content: View>: View {
     
     public var body: some View {
-        ZStack {
+        Stack {
             color
-                .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
             
             content
         }

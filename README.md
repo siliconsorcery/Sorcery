@@ -4,6 +4,12 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.12
+
+- Refactored Card View to use Stack, Column and Row
+- Add Stack, Column and Row Views with improved simplicity and layout options over supplied ZStack, VStack and HStack.
+- Fix EdgeReveal, refactored shadow as it was screwing with gesture's in List and ScrollView!
+
 ## 0.0.11
 
 - Refactored Material colors from SwiftUI.Color to UIKit.Color. This allow for color transforms before they are converted to SwiftUI.Color.
