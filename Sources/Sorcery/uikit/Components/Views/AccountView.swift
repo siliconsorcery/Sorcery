@@ -53,7 +53,7 @@ class AccountView: UIView {
 
     let piconView: UIView = {
         let view = UIView()
-        view.backgroundColor = SorceryColor.white
+        view.backgroundColor = Material.white
         view.isUserInteractionEnabled = true
         view.layer.cornerRadius = 20.0
         return view

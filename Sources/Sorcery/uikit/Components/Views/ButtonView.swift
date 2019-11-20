@@ -13,9 +13,9 @@ class ButtonView: UIButton {
 
     init(
         _ title: String = "",
-        titleColor: UIColor = SorceryColor.white,
+        titleColor: UIColor = Material.white,
 //        titleFormat: Assets.Format = .body,
-        backgroundColor: UIColor = SorceryColor.blue.shift(lightness: -0.6)
+        backgroundColor: UIColor = Material.blue.shift(lightness: -0.6)
     ) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false

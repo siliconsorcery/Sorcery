@@ -2,28 +2,26 @@
 //  Color.swift
 //  Sorcery
 //
-//  Created by John Cumming on 11/16/17.
-//  Copyright © 2017 Silicon Sorcery. All rights reserved.
+//  Created by John Cumming on 11/3/19.
+//  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
 import UIKit
 
-/// Lossely based on MaterialColors and subdividing the spectrum
-public enum SorceryColor {
-    
-    static let clear = UIColor.clear
+public enum Material {
 
+    // Lossely based on MaterialColors and subdividing the spectrum
+    
     // Usefull hints about naming colors: https://www.color-blindness.com/color-name-hue/
 
     // Use UIColor.ligtness(CFFloat)
     // Lighter version eg. color.ligtness(0.1)
     // Darker version eg. color.ligtness(-0.1)
 
-    // TASK: Rework colors to use HSL
-    // eg: static let red = UIColor.init(hue: 0, saturation: 1.0, lightness: 0.5)
-
     // Base color subdivisions
     // Approx: (Hue: Color, Saturation: 1.0, Lightness: 0.5)
+    
+    // Base color subdivisions
 
     public static let red = UIColor(rgb: 0xF44336)
     public static let orange = UIColor(rgb: 0xFF9800)
