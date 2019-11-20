@@ -15,7 +15,7 @@ public struct EdgeReveal<Content: View>: View {
         let progress = reveal.progress(edge)
         
         let offset = closed + delta() * CGFloat(progress)
-        
+                
         return GeometryReader { _ in
             // Fade background
             Color
@@ -62,12 +62,12 @@ public struct EdgeReveal<Content: View>: View {
                     )
 
                 }
-                .simultaneously(
-                    with: TapGesture()
-                    .onEnded {
-                        self.reveal.toggle(self.edge)
-                    }
-                )
+//                .simultaneously(
+//                    with: TapGesture()
+//                    .onEnded {
+//                        self.reveal.toggle(self.edge)
+//                    }
+//                )
             )
         }
         .animation(.spring())

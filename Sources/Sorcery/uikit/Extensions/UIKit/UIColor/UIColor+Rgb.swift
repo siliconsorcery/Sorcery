@@ -36,7 +36,7 @@ extension UIColor {
     /// Create a UIColor from a rgb hexidecimal representation
     ///
     /// - Parameter rgb: int representation of color. Use hex '0x00FF00' for green
-    convenience init(rgb: Int) {
+    public convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,
             green: (rgb >> 8) & 0xFF,

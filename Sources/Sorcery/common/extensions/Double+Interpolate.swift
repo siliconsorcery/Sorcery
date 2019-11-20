@@ -1,12 +1,10 @@
 //
-//  Double-Interpolate.swift
+//  Double+Interpolate.swift
 //  App
 //
 //  Created by John Cumming on 11/10/19.
 //  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
-
-import SwiftUI
 
 extension Double {
     

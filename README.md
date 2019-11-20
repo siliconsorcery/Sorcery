@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.10
+
+- Add Material colors
+
 ## 0.0.9
 
 - Refactored EdgeReveal to use an EnvironmentObject (EdgeRevealModel) for state

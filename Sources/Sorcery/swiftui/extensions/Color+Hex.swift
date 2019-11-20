@@ -1,5 +1,5 @@
 //
-//  Color-Hex.swift
+//  Color+Hex.swift
 //  App
 //
 //  Created by John Cumming on 11/10/19.
@@ -10,14 +10,6 @@ import SwiftUI
 
 extension Color {
     
-    public init(hex: Int) {
-        self.init(
-            red: hex.ff(16),
-            green: hex.ff(08),
-            blue: hex.ff(00)
-        )
-    }
-    
     public init(hex: String) {
         let scanner = Scanner(string: hex)
         var rgbValue: UInt64 = 0
@@ -27,7 +19,11 @@ extension Color {
         let g = (rgbValue & 0xff00) >> 8
         let b = rgbValue & 0xff
 
-        self.init(red: Double(r) / 0xff, green: Double(g) / 0xff, blue: Double(b) / 0xff)
+        self.init(
+            red: Double(r) / 0xff,
+            green: Double(g) / 0xff,
+            blue: Double(b) / 0xff
+        )
     }
     
 }
