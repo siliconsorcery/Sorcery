@@ -11,7 +11,7 @@ import SwiftUI
 public struct Row<Content: View>: View {
     
     public var body: some View {
-        
+                        
         let horizontal = tight ? .center : self.horizontal
         
         return VStack(alignment: horizontal, spacing: spacing) {

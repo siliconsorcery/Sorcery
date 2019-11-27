@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.13
+
+- Add Reflux, a replacement for SwiftUIFlux that uses classes over structs
+
 ## 0.0.12
 
 - Refactored Card View to use Stack, Column and Row
