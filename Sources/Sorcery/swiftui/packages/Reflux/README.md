@@ -3,34 +3,36 @@ A very naive implementation of Redux using Combine BindableObject to serve as an
 
 `Store`
 
-`Reflux` (was FluxState)
+`RefluxState` (was FluxState)
 
 `Middleman` (was Middleware)
 
 `Apply` (was Reducer)
 
-(was Dispatch)
-
+`Dispatch` (was DispatchFunction)
 
 ## Usage
 
 In this little guide, I'll show you two ways to access your proprerties from your `state`, one very naive, which works by using direct access to `store.state` global or injected `@EnvironmentObject` and the other one if you want to use `ConnectedView`.
 
-You first have to make a class which will contain your application state and it needs to conform to `ReFluxState`. You can add any substate you want.
+You first have to make a class which will contain your application state and it needs to conform to `RefluxState`. You can add any substate you want.
 
-The application state also needs an `apply` function that executes the action's `apply` method that in turn updates the `state`.
+The application state also needs an `apply` function that updates the `state` based on the `action`.
 
 ``` Swift
 import Sorcery
 
 class AppState: RefluxState {
+
     var moviesState = MoviesState()
+    var peopleState = PeopleState()
 
     static func apply(
         state: AppState,
         action: Action
     ) -> AppState {
         action.apply(to: state.moviesState)
+        action.apply(to: state.peopleState)
         return state
     }
 }
@@ -44,13 +46,17 @@ class Movie: Identifiable, Codable {
     let original_title: String
     let title: String
 }
+
+class PeopleState: RefluxState, Codable {
+    var title: String
+}
 ```
 
-Finally, you have to add you `Store` which will contain you current application state `AppState` as a global constant or contain in a root `View`.
+Finally, you have to add a `Store` which will contain you current application state `AppState` as a global constant or contain it in a root `View`.
 
-## Global State
+## AppState as a Global
 
-You instantiate with your initial application `state`, any `middleman` and your main `apply` function.
+You instantiate a `Store` with your initial application `state`, any `middleman` and your main `apply` function.
 
 And now the part where you inject it in your SwiftUI app.
 The most common way to do it is in your `SceneDelegate` when your initiate your view hierarchy is created. You should use the provided `StoreProvider` to wrap you whole app root view hiearchy inside it. It'll auto magically inject the store as an `@EnvironmentObject` in all your views.
@@ -89,16 +95,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 ```
 
-In View
+## AppState in a Root View
 
 ```Swift
-struct MyRootView: View {
+struct ContentView: View {
 
     var body: some View {
-        RStoreProvider(store: store) {
+        StoreProvider(store: store) {
             HomeView()
-            .onAppear { Log.task() }
-            .onDisappear { Log.task() }
         }
     }
 
@@ -112,10 +116,13 @@ struct MyRootView: View {
 
 From there, there are two ways to access your `state` properties.
 
+## Directly use the @EnvironmentObject
+
 In any `view` where you want to access your application state, you can do it using `@EnvironmentObject`
 
 ``` Swift
-struct MovieDetail : View {
+struct MovieDetail: View {
+
     @EnvironmentObject var store: Store<AppState>
 
     let movieId: Int
@@ -143,8 +150,10 @@ And it's efficient enough that this library don't have to provide custom subscri
 
 You can also use `ConnectedView,` this is the new prefered way to do it as it feels more redux like. But the end result is exactly the same. You just have a better separation of concerns, no wild call to store.state and proper local properties.
 
+## Use the ConnectedView
+
 ``` Swift
-struct MovieDetail : ConnectedView {
+struct MovieDetail: ConnectedView {
 
     let movieId: Int
 
@@ -154,7 +163,7 @@ struct MovieDetail : ConnectedView {
 
     func map(
         state: AppState, 
-        dispatch: @escaping DispatchFunction
+        dispatch: @escaping Dispatch
     ) -> Props {
         return Props(
             movie: state.moviesState.movies[movieId]!
@@ -174,24 +183,30 @@ struct MovieDetail : ConnectedView {
 
 You have to implement a map function which convert properties from your state to local view props. And also a new body method which will provide you with your computed props at render time.
 
-At some point, you'll need to make changes to your state, for that you need to create and dispatch `Action`
+At some point, you'll need to make changes to your state, for that you need to create and dispatch an `Action`
 
 `AsyncAction` is available as part of this library, and is the right place to do network query, if'll be executed by an internal `middleman` when you dispatch it.
 
-You can then chain any action when you get a result or an error.
+You can then chain any `Action` when you get a result or an error.
 
 ``` Swift
-struct MoviesActions {
-    struct FetchDetail: AsyncAction {
-        let movie: Int
+extension MoviesState {
+
+    class FetchDetail: AsyncAction {
+
+        let movieId: Int
+
+        init(movieId: Int) {
+            self.movieId = movieId
+        }
 
         func execute(state: FluxState?, dispatch: @escaping DispatchFunction) {
-            APIService.shared.GET(endpoint: .movieDetail(movie: movie))
+            APIService.shared.GET(endpoint: .movieDetail(movieId: movieId))
             {
                 (result: Result<Movie, APIService.APIError>) in
                 switch result {
                 case let .success(response):
-                    dispatch(SetDetail(movie: self.movie, movie: response))
+                    dispatch(SetDetail(movieId: self.movieId, movie: response))
                 case .failure(_):
                     break
                 }
@@ -199,8 +214,8 @@ struct MoviesActions {
         }
     }
 
-    struct SetDetail: Action {
-        let movie: Int
+    class SetDetail: Action {
+        let movieId: Int
         let movie: Movie
     }
 
@@ -209,32 +224,37 @@ struct MoviesActions {
 
 And then finally, you can `dispatch` them, if you look at the code of the `apply` at the begining of this readme, you'll see how `action` are `applied`. The `apply` is the only function where you are allowed to mutate your `state`.
 
-As everything in the AppState are Swift `class`, you actually return the modified `state` from an `apply` method. In addition, nothing prevents write operations outside of the 'apply' methods. This aligns poorly with the Redux achitecture.
+As everything in the `AppState` are made of Swift `class` instances, you actually return the modified `state` from an `apply` method. Class instanaces allows for dynamic dispatch which makes it easy to centralises coding of `Action` and `apply`. In addition, nothing prevents write operations outside of the `apply` methods which is `bad`!. This aligns poorly with the `Redux` achitecture.
 
 ``` Swift
-struct MovieDetail: View {
-    @EnvironmentObject var store: Store<AppState>
+struct MovieDetail: ConnectedView {
 
     let movieId: Int
 
-    var movie: Movie {
-        return store.state.moviesState.movies[movieId]
+    struct Props {
+        let movie: Movie
+        let onAppear: () -> Void
     }
 
-    func fetchMovieDetails() {
-        store.dispatch(
-            action: MoviesActions.FetchDetail(movie: movie.id)
+    func map(
+        state: AppState,
+        dispatch: @escaping Dispatch
+    ) -> Props {
+        return Props(
+            movie: state.moviesState.movies[movieId]!
+            onAppear: MoviesActions.FetchDetail(movie: movieId)
         )
     }
 
-    var body: some View {
+    func body(props: Props) -> some View {
         ZStack(alignment: .bottom) {
             List {
-                MovieBackdrop(movieId: movie.id)
+                MovieBackdrop(movieId: props.movieId)
                 // ...
             }
-        }.onAppear {
-            self.fetchMovieDetails()
+        }
+        .onAppear {
+            self.onAppear()
         }
     }
 }
