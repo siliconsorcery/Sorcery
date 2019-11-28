@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.16
+
+- Whoops, remove the `apply` requirement public
+
 ## 0.0.15
 
 - Make the `apply` requirement public
