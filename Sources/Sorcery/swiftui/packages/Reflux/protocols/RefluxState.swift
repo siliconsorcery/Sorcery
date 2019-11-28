@@ -7,5 +7,5 @@
 //
 
 public protocol RefluxState {
-    func apply(_ action: Action) -> RefluxState
+    public func apply(_ action: Action) -> RefluxState
 }
