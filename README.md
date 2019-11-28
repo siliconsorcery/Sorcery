@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.15
+
+- Make the `apply` requirement public
+
 ## 0.0.14
 
 - Add an `apply` requirement for `RefluxState`, Remove `apply` requirement from `Store`.
