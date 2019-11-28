@@ -6,4 +6,4 @@
 //  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
-public typealias Apply<S> = (_ state: S, _ command: Action) -> S
+public typealias Apply = (_ action: Action) -> RefluxState

@@ -14,15 +14,14 @@ final public class Store<S: RefluxState>: ObservableObject {
     @Published public var state: S
 
     private var dispatchFunction: Dispatch!
-    private let apply: Apply<S>
+    private let apply: Apply
     
     public init(
         state: S,
-        middleman: [Middleman<S>] = [],
-        apply: @escaping Apply<S>
+        middleman: [Middleman<S>] = []
     ) {
         self.state = state
-        self.apply = apply
+        self.apply = state.apply
         
         var middleman = middleman
         middleman.append(asyncActionsMiddleman)
@@ -45,6 +44,6 @@ final public class Store<S: RefluxState>: ObservableObject {
     }
     
     private func _dispatch(action: Action) {
-        state = apply(state, action)
+        state = apply(action) as! S
     }
 }

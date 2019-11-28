@@ -1,4 +1,5 @@
 # Reflux - Based on SwiftUIFlux
+
 A very naive implementation of Redux using Combine BindableObject to serve as an example
 
 `Store`
@@ -27,18 +28,22 @@ class AppState: RefluxState {
     var moviesState = MoviesState()
     var peopleState = PeopleState()
 
-    static func apply(
-        state: AppState,
-        action: Action
-    ) -> AppState {
-        action.apply(to: state.moviesState)
-        action.apply(to: state.peopleState)
-        return state
+    func apply(_ action: Action) -> RefluxState {
+        _ = self.moviesState.apply(action)
+        _ = self.peopleState.apply(action)
+        return self
     }
 }
 
 class MoviesState: RefluxState, Codable {
-    var movies: [Int: Movie] = [:]
+    var data = Model()
+    func apply(_ action: Action) -> RefluxState {
+        action.apply(to: self)
+        return self
+    }
+    struct Model: Codable {
+        var movies: [Int: Movie] = [:]
+    }
 }
 
 class Movie: Identifiable, Codable {
@@ -48,7 +53,30 @@ class Movie: Identifiable, Codable {
 }
 
 class PeopleState: RefluxState, Codable {
-    var title: String
+
+    var data = Model()
+
+    func apply(_ action: Action) -> RefluxState {
+        action.apply(to: self)
+        return self
+    }
+
+    struct Model: Codable {
+        var title: String
+    }
+
+    class Set: Action {
+        let newTitle: String
+
+        init(newTitle: String) {
+            self.newTitle = newTitle
+        }
+
+        func apply(to state: RefluxState) {
+            guard let state = state as? PeopleState else { return }
+            state.data.title = newTitle
+        }
+    }
 }
 ```
 
@@ -64,8 +92,7 @@ The most common way to do it is in your `SceneDelegate` when your initiate your 
 ```Swift
 let store = Store<AppState>(
     state: AppState(),
-    middleman: [],
-    apply: AppState.apply
+    middleman: []
 )
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -108,8 +135,7 @@ struct ContentView: View {
 
     @State private var store = Store<AppState>(
         state: AppState(),
-        middleman: [],
-        apply: AppState.apply
+        middleman: []
     )
 }
 ```

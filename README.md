@@ -4,9 +4,13 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.14
+
+- Add an `apply` requirement for `RefluxState`, Remove `apply` requirement from `Store`.
+
 ## 0.0.13
 
-- Add Reflux, a replacement for SwiftUIFlux that uses classes over structs
+- Add `Reflux`, a replacement for `SwiftUIFlux` that uses classes over structs
 
 ## 0.0.12
 
