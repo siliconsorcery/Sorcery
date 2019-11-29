@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.24
+
+- Add public init to `Command`
+
 ## 0.0.23
 
 - Reduce number default `Command/Response` types

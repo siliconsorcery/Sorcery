@@ -20,6 +20,7 @@ public protocol ExecuteProtocol {
 // MARK: - Command
 
 open class Command {
+    public init() {}
     @discardableResult
     open func run(_ any: Any? = nil) -> Response {
         return NilResponse()
