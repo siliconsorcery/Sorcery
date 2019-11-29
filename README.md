@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.21
+
+- Make all `Command/Response` interfaces `open/public`
+
 ## 0.0.20
 
 - Make  `Command` / `Response`  open 

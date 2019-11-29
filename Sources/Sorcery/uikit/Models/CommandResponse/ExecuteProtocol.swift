@@ -21,19 +21,21 @@ public protocol ExecuteProtocol {
 
 open class Command {
     @discardableResult
-    public func run(_ any: Any? = nil) -> Response {
+    open func run(_ any: Any? = nil) -> Response {
         return NilResponse()
     }
 }
 
-public class NilCommand: Command {}
-public class ExitCommand: Command {}
-public class NavigateCommand: Command {}
+open class NilCommand: Command {}
+open class ExitCommand: Command {}
+open class NavigateCommand: Command {}
 
 // MARK: - Response
 
-open class Response {}
-public class NilResponse: Response {}
-public class CompletedResponse: Response {}
-public class InCompletedResponse: Response {}
-public class DismissResponse: Response {}
+open class Response {
+    public init() {}
+}
+open class NilResponse: Response {}
+open class CompletedResponse: Response {}
+open class InCompletedResponse: Response {}
+open class DismissResponse: Response {}
