@@ -19,7 +19,7 @@ public protocol ExecuteProtocol {
 
 // MARK: - Command
 
-public class Command {
+open class Command {
     @discardableResult
     public func run(_ any: Any? = nil) -> Response {
         return NilResponse()
@@ -32,7 +32,7 @@ public class NavigateCommand: Command {}
 
 // MARK: - Response
 
-public class Response {}
+open class Response {}
 public class NilResponse: Response {}
 public class CompletedResponse: Response {}
 public class InCompletedResponse: Response {}
