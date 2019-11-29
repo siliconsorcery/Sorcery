@@ -91,7 +91,7 @@ class HeaderView: UIView {
 
         iconImageView.onTap { [weak self] _ in
             guard let this = self else { return }
-            _ = this._delegate?.execute?(ExitCommand())
+            _ = this._delegate?.execute?(NilCommand())
         }
 
 //        update()
