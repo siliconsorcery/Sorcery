@@ -14,7 +14,7 @@ extension TimeInterval {
      
      Blocks are minutes, hours, days, weeks, months
      */
-    func formatted() -> String {
+    public func formatted() -> String {
         let minute: Double = 60
         let hour: Double = 60 * 60
         let day: Double = hour * 24

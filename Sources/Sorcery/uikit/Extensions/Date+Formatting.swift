@@ -9,15 +9,15 @@
 import UIKit
 
 extension Date {
-    var timestamp: Int64 {
+    public var timestamp: Int64 {
         return Int64((self.timeIntervalSince1970 * 1_000.0))
     }
 
-    init(timestamp: Int64) {
+    public init(timestamp: Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(timestamp) / 1_000.0)
     }
     
-    func relative(
+    public func relative(
         to now: Date = Date(),
         showTime: Bool = true
     ) -> String {
@@ -80,7 +80,7 @@ extension Date {
         return "WTF"
     }
     
-    func relativeDay(
+    public func relativeDay(
         to now: Date = Date()
     ) -> String
     {
@@ -110,7 +110,7 @@ extension Date {
     ///                 "EEEE" -> "Monday"
     ///                 "d EEEE" -> "8 Monday"
     /// - Returns: String representation of formatted data
-    func toString(formattedBy dateFormat: String  = "MMMM d, y h:mm:ss a") -> String {
+    public func toString(formattedBy dateFormat: String  = "MMMM d, y h:mm:ss a") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.string(from: self)
@@ -120,13 +120,13 @@ extension Date {
     ///
     /// - Parameter date: to calculate with or 'nil' to use now.
     /// - Returns: Duration as a String
-    func durationToString(_ date: Date = Date()) -> String {
+    public func durationToString(_ date: Date = Date()) -> String {
         let duration = abs(timeIntervalSince(date))
         return duration.formatted()
     }
 
     /// Returns an iso8601 string representation of the date
-    var iso8601: String {
+    public var iso8601: String {
         let iso8601DateFromatter: DateFormatter = {
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)
@@ -142,7 +142,7 @@ extension Date {
     ///
     /// - Parameter iso8601: date formatted as String
     /// - Returns: new date
-    static func from(iso8601: String) -> Date? {
+    public static func from(iso8601: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         return dateFormatter.date(from: iso8601)
@@ -152,7 +152,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of years
-    func years(from date: Date) -> Int {
+    public func years(from date: Date) -> Int {
         return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
     }
 
@@ -160,7 +160,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of months
-    func months(from date: Date) -> Int {
+    public func months(from date: Date) -> Int {
         return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
     }
 
@@ -168,7 +168,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of weeks
-    func weeks(from date: Date) -> Int {
+    public func weeks(from date: Date) -> Int {
         return Calendar.current.dateComponents([.weekOfYear], from: date, to: self).weekOfYear ?? 0
     }
 
@@ -184,7 +184,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of hours
-    func hours(from date: Date) -> Int {
+    public func hours(from date: Date) -> Int {
         return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
     }
 
@@ -192,7 +192,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of minutes
-    func minutes(from date: Date) -> Int {
+    public func minutes(from date: Date) -> Int {
         return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
     }
 
@@ -200,14 +200,14 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of seconds
-    func seconds(from date: Date) -> Int {
+    public func seconds(from date: Date) -> Int {
         return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
     }
 
     /// Removes the hours, minutes and seconds from the date
     ///
     /// - Returns: new Date
-    func removeTime() -> Date {
+    public func removeTime() -> Date {
         var parts = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute, .second, .weekday], from: self)
         parts.hour = 0
         parts.minute = 0
@@ -222,7 +222,7 @@ extension Date {
     ///   - plusHour: round to hours
     ///   - roundedMinutes: round to minutes
     /// - Returns: new rounded date
-    func bumpTo(plusHour: Int = 0, roundedMinutes: Int = 15) -> Date {
+    public func bumpTo(plusHour: Int = 0, roundedMinutes: Int = 15) -> Date {
         var parts = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute, .second, .weekday], from: self)
         if (plusHour != 0) {
             parts.hour = parts.hour! + plusHour
@@ -250,7 +250,7 @@ extension Date {
     ///     12:59.nowRounded(plusHours: 1) -> 14:00 // Since now was only 1 minute from top to the hour
     ///     12:04.nowRounded(roundingMinutes: 30) -> 12:30
     ///     12:16.nowRounded(miniumMinutes: 30) > Assets: miniumMinutes can't be larger roundingMinutes
-    func rounded(plusHours: Int = 0, roundingMinutes: Int = 15, miniumMinutes: Int = 5) -> Date {
+    public func rounded(plusHours: Int = 0, roundingMinutes: Int = 15, miniumMinutes: Int = 5) -> Date {
         let now = self
         var parts = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute, .second, .weekday], from: now)
         if (plusHours != 0) {
@@ -283,7 +283,7 @@ extension Date {
     ///   - hour: int hours
     ///   - minute: int minutes
     /// - Returns: new Date
-    func advanceTo(hour: Int = 0, minute: Int = 0) -> Date {
+    public func advanceTo(hour: Int = 0, minute: Int = 0) -> Date {
         var nextDateComponents = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute, .second, .weekday], from: self)
 
         if nextDateComponents.hour! > hour {
@@ -310,7 +310,7 @@ extension Date {
     ///   - minutes: int minutes
     ///   - seconds: int seconds
     /// - Returns: new date
-    func advanceBy(
+    public func advanceBy(
         days: Int = 0,
         hours: Int = 0,
         minutes: Int = 0,

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIContextualAction {
-    static func make(
+    public static func make(
         style: UIContextualAction.Style = .normal,
         title: String,
         image: UIImage,

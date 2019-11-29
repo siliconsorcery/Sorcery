@@ -92,7 +92,7 @@ extension UILabel {
     /// - Parameter align: use of the following: .left, .right, .center, .justified, .natural
     /// - Returns: returns self to allow for chaining
     @discardableResult
-    func align(_ align: NSTextAlignment) -> UILabel {
+    public func align(_ align: NSTextAlignment) -> UILabel {
         let label = self
         label.textAlignment = align
         return label
@@ -103,7 +103,7 @@ extension UILabel {
     /// - Parameter color: text color
     /// - Returns: return self to allow chaining
     @discardableResult
-    func color(_ color: UIColor) -> UILabel {
+    public func color(_ color: UIColor) -> UILabel {
         let label = self
         label.textColor = color
         return label
@@ -115,7 +115,7 @@ extension UILabel {
     /// - Parameter value: spacing
     /// - Returns: return self to allow chaining
     @discardableResult
-    func charactersSpacing(_ characterSpacing: CGFloat = -1.5) -> UILabel {
+    public func charactersSpacing(_ characterSpacing: CGFloat = -1.5) -> UILabel {
         let label = self
 
         if let string = label.text {

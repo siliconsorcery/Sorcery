@@ -11,7 +11,7 @@ import UIKit
 
 extension UIControl {
     /// Adds a handler that will be invoked for the specified control events
-    func on(_ controlEvents: UIControl.Event, invokeHandler handler: @escaping (UIControl) -> Void) -> AnyObject {
+    public func on(_ controlEvents: UIControl.Event, invokeHandler handler: @escaping (UIControl) -> Void) -> AnyObject {
         let closureHandler = ClosureHandler(handler: handler, control: self)
         addTarget(closureHandler, action: kClosureHandlerSelector, for: controlEvents)
         var handlers = self.handlers ?? Set<ClosureHandler<UIControl>>()
@@ -21,7 +21,7 @@ extension UIControl {
     }
 
     /// Removes a handler from the control
-    func removeHandler(_ handler: AnyObject) {
+    public func removeHandler(_ handler: AnyObject) {
         guard let handler = handler as? ClosureHandler<UIControl> else { return }
         removeTarget(handler, action: kClosureHandlerSelector, for: .allEvents)
         if var handlers = self.handlers {

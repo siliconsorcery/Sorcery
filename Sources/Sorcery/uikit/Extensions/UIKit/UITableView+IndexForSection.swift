@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableView {
-	func indexForSection(at location: CGPoint) -> Int? {
+	public func indexForSection(at location: CGPoint) -> Int? {
 		// Find the section that we are dragging over
 		let count = self.numberOfSections
 		for index in 0...count - 1 {

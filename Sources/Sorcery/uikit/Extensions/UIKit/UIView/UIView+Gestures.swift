@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func addGestures(target: Any?, action: Selector?) {
+    public func addGestures(target: Any?, action: Selector?) {
         let tripleTapGesture = UITapGestureRecognizer(target: target, action: action)
         tripleTapGesture.numberOfTapsRequired = 3
 

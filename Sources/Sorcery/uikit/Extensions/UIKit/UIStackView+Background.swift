@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIStackView {
-    func changeBackgroundColor(_ color: UIColor) {
+    public func changeBackgroundColor(_ color: UIColor) {
         let backgroundLayer = CAShapeLayer()
         layer.insertSublayer(backgroundLayer, at: 0)
         backgroundLayer.path = UIBezierPath(rect: bounds).cgPath

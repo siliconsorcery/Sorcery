@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-    func tinted(with color: UIColor) -> UIImage? {
+    public func tinted(with color: UIColor) -> UIImage? {
         if let maskImage = cgImage {
             let width = size.width
             let height = size.height
@@ -32,7 +32,7 @@ extension UIImage {
         return nil
     }
 
-    func tint(with color: UIColor) -> UIImage? {
+    public func tint(with color: UIColor) -> UIImage? {
         guard let cgImage = cgImage else { return nil }
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 

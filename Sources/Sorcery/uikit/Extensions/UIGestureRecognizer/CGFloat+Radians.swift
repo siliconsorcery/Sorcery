@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 extension CGFloat {
-    var radians: CGFloat {
+    public var radians: CGFloat {
         return CGFloat.pi * (self / 180)
     }
 
-    init(degrees: CGFloat) {
+    public init(degrees: CGFloat) {
         self = CGFloat.pi * degrees / 180
     }
 }

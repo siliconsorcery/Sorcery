@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Alignment: Int {
+public enum Alignment: Int {
     case topLeft = 0
     case topCenter = 1
     case topRight = 2

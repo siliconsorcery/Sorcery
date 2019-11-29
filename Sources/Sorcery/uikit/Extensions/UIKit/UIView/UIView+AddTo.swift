@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func addTo(_ view: UIView) {
+    public func addTo(_ view: UIView) {
         view.addSubview(self)
         frame = view.bounds
         autoresizingMask = [.flexibleWidth, .flexibleHeight]

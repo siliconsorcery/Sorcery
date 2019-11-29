@@ -28,7 +28,7 @@ extension UIBarButtonItem {
 
 extension UIBarButtonItem {
     /// A handler that is invoked when the item is selected
-    var handler: ((UIBarButtonItem) -> Void)? {
+    public var handler: ((UIBarButtonItem) -> Void)? {
         get { return closureHandler?.handler }
         set {
             if let newValue = newValue {
@@ -46,7 +46,7 @@ extension UIBarButtonItem {
     /**
         Initializes a new item using the specified image, style and handler
      */
-    convenience init(image: UIImage?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
+    public convenience init(image: UIImage?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
         self.init(image: image, style: style, target: nil, action: nil)
         initClosureHandler(handler)
     }
@@ -54,7 +54,7 @@ extension UIBarButtonItem {
     /**
         Initializes a new item using the specified images, style and handler
      */
-    convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
+    public convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
         self.init(image: image, landscapeImagePhone: landscapeImagePhone, style: style, target: nil, action: nil)
         initClosureHandler(handler)
     }
@@ -62,7 +62,7 @@ extension UIBarButtonItem {
     /**
         Initializes a new item using the specified title, style and handler
      */
-    convenience init(title: String?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
+    public convenience init(title: String?, style: UIBarButtonItem.Style, handler: ((UIBarButtonItem) -> Void)? = nil) {
         self.init(title: title, style: style, target: nil, action: nil)
         initClosureHandler(handler)
     }
@@ -70,7 +70,7 @@ extension UIBarButtonItem {
     /**
         Initializes a new item containing the specified system item and using the specified handler
      */
-    convenience init(barButtonSystemItem systemItem: UIBarButtonItem.SystemItem, handler: ((UIBarButtonItem) -> Void)? = nil) {
+    public convenience init(barButtonSystemItem systemItem: UIBarButtonItem.SystemItem, handler: ((UIBarButtonItem) -> Void)? = nil) {
         self.init(barButtonSystemItem: systemItem, target: nil, action: nil)
         initClosureHandler(handler)
     }
@@ -78,12 +78,11 @@ extension UIBarButtonItem {
     /**
         Initializes a new item containing the specified view and using the specified handler
      */
-    convenience init(customView: UIView, handler: @escaping (UIBarButtonItem) -> Void) {
+    public convenience init(customView: UIView, handler: @escaping (UIBarButtonItem) -> Void) {
         self.init(customView: customView)
 
         customView.onTap { _ in
             handler(self)
         }
-//        initClosureHandler(handler)
     }
 }

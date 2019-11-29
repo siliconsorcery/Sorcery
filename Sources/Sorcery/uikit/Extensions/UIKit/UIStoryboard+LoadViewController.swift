@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIStoryboard {
-	class func loadViewController(from name: String? = "Root", indentifer: String? = nil) -> UIViewController? {
+	public class func loadViewController(from name: String? = "Root", indentifer: String? = nil) -> UIViewController? {
 		guard name != nil else { return nil }
 		let storyboard = UIStoryboard(name: name!, bundle: nil)
 		if indentifer == nil {

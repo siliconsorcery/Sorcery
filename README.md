@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.17
+
+- Expose model public offerings
+
 ## 0.0.16
 
 - Whoops, remove the `apply` requirement public

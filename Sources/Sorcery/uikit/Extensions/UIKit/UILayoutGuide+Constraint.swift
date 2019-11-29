@@ -40,7 +40,7 @@ extension UILayoutGuide {
     ///    centerX, top, width, height
     ///
     @discardableResult
-    func constrain(
+    public func constrain(
         activate: Bool = true,
 
         top: NSLayoutYAxisAnchor? = nil,
