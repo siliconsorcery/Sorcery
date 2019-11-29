@@ -26,16 +26,36 @@ open class Command {
     }
 }
 
-open class NilCommand: Command {}
-open class ExitCommand: Command {}
-open class NavigateCommand: Command {}
+open class NilCommand: Command {
+    public override init() {}
+}
+
+open class ExitCommand: Command {
+    public override init() {}
+}
+
+open class NavigateCommand: Command {
+    public override init() {}
+}
 
 // MARK: - Response
 
 open class Response {
     public init() {}
 }
-open class NilResponse: Response {}
-open class CompletedResponse: Response {}
-open class InCompletedResponse: Response {}
-open class DismissResponse: Response {}
+
+open class NilResponse: Response {
+    public override init() {}
+}
+
+open class CompletedResponse: Response {
+    public override init() {}
+}
+
+open class InCompletedResponse: Response {
+    public override init() {}
+}
+
+open class DismissResponse: Response {
+    public override init() {}
+}
