@@ -19,7 +19,7 @@ import UIKit
 // [timestamp] [icon] [type]: [message] ➡️ in [function() signature] [[filename]:[lineNumber]]
 //
 // Use Xcode's 'File > Open Quickly...' to past in [filename]:[lineNumber] to revisit
-/// source file that generated Log entry.
+
 public enum Log {
 
     public enum Output {

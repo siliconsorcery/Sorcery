@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.25
+
+- Renamed `store.dispatch(action: Action)` to `store.dispatch(_ action: Action)` 
+
 ## 0.0.24
 
 - Add public init to `Command`

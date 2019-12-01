@@ -31,13 +31,13 @@ final public class Store<S: RefluxState>: ObservableObject {
                 { [unowned self] action in
                     self._dispatch(action: action) },
                 { dispatchFunction, middleman in
-                    let dispatch: (Action) -> Void = { [weak self] in self?.dispatch(action: $0) }
+                    let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
                     let getState = { [weak self] in self?.state }
                     return middleman(dispatch, getState)(dispatchFunction)
             })
     }
 
-    public func dispatch(action: Action) {
+    public func dispatch(_ action: Action) {
         DispatchQueue.main.async {
             self.dispatchFunction(action)
         }

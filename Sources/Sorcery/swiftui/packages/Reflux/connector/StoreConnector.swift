@@ -17,7 +17,7 @@ public struct StoreConnector<S: RefluxState, V: View>: View {
     public var body: V {
         content(
             store.state,
-            store.dispatch(action:)
+            store.dispatch
         )
     }
 }

@@ -21,6 +21,7 @@ public protocol ExecuteProtocol {
 
 open class Command {
     public init() {}
+    
     @discardableResult
     open func run(_ any: Any? = nil) -> Response {
         return NilResponse()

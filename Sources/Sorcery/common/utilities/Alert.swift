@@ -16,9 +16,10 @@ enum Alert {
         from viewController: UIViewController? = nil,
         completion: ((UIAlertAction) -> Void)? = nil
     ) {
-        if let viewController: UIViewController = viewController ?? (
-
-            UIApplication.shared.windows.first( where: { $0.isKeyWindow })?.rootViewController ) {
+        if let viewController: UIViewController =
+            viewController ??
+            UIApplication.shared.windows.first( where: { $0.isKeyWindow })?.rootViewController
+        {
 
             let hasCancel = (accept != nil)
             let accept: String = accept ?? "OK"
