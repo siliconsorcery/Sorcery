@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.27
+
+- Add `Services` as a Generic. Side effect, all `ConnectedViews` need to provide `typealias Services = AppServices`
+
 ## 0.0.26
 
 - Create a `MockCoreServices` to act as a `Nil`

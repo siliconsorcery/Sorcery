@@ -10,6 +10,7 @@ import SwiftUI
 
 public protocol ConnectedView: View {
     associatedtype S: RefluxState
+    associatedtype Services: CoreServices
     associatedtype Props
     associatedtype V: View
     
@@ -36,7 +37,7 @@ public extension ConnectedView {
         return body(props: props)
     }
     
-    var body: StoreConnector<S, V> {
+    var body: StoreConnector<S, Services, V> {
         return StoreConnector(content: render)
     }
 }

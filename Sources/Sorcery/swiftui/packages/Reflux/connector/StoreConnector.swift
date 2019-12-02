@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-public struct StoreConnector<S: RefluxState, V: View>: View {
+public struct StoreConnector<S: RefluxState, C: CoreServices, V: View>: View {
     
-    @EnvironmentObject var store: Store<S, MockCoreServices>
+    @EnvironmentObject var store: Store<S, C>
     
     let content: (S, @escaping Dispatch) -> V
     

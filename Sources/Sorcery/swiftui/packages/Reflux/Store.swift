@@ -11,13 +11,13 @@ import SwiftUI
 import Combine
 
 final public class Store<S: RefluxState, C: CoreServices>: ObservableObject {
+    
     @Published public var state: S
+    public let services: C
 
     private var dispatchFunction: Dispatch!
     private let apply: Apply
-    
-    public let services: C
-    
+        
     public init(
         state: S,
         middleman: [Middleman<S>] = [],

@@ -12,7 +12,7 @@ public protocol CoreServices {}
 
 public class MockCoreServices: CoreServices {
     
-    public let version = "Mock-AppServices-0.0.0"
+    public let version = "Mock-AppServices-0.0.1"
     
     public init() {}
 }
