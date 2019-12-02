@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.31
+
+- Remove `ReflectedStringConvertible` from `AsyncAction`. `AsyncAction` implements `Action` which already implements `ReflectedStringConvertible`
+
 ## 0.0.30
 
 - Add `ReflectedStringConvertible` to `AsyncAction`
