@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.29
+
+- Add `ReflectedStringConvertible` protocol
+
 ## 0.0.28
 
 - Refactor `ConnectedView` to pass services tp the `map` function. This removes the need to provide `typealias` in the struct.

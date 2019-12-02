@@ -6,7 +6,7 @@
 //  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
-public protocol Action {
+public protocol Action: ReflectedStringConvertible {
     func apply(to state: RefluxState)
 }
 
