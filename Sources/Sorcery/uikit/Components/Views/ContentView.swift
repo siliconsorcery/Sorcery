@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContentView: UIView {
+class ContentsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false

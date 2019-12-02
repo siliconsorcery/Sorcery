@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-public struct StoreProvider<S: RefluxState, V: View>: View {
-    public let store: Store<S>
+public struct StoreProvider<S: RefluxState, C: CoreServices, V: View>: View {
+    public let store: Store<S, C>
     public let content: () -> V
     
     public init(
-        store: Store<S>,
+        store: Store<S, C>,
         content: @escaping () -> V
     ) {
         self.store = store

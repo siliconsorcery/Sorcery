@@ -4,6 +4,11 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.26
+
+- Create a `MockCoreServices` to act as a `Nil`
+- Add `CoreServices` to the `Store`
+
 ## 0.0.25
 
 - Renamed `store.dispatch(action: Action)` to `store.dispatch(_ action: Action)` 
