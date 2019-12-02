@@ -10,12 +10,13 @@ import SwiftUI
 
 public protocol ConnectedView: View {
     associatedtype S: RefluxState
-    associatedtype Services: CoreServices
+    associatedtype C: CoreServices
     associatedtype Props
     associatedtype V: View
     
     func map(
         state: S,
+        services: C,
         dispatch: @escaping Dispatch
     ) -> Props
     
@@ -26,18 +27,20 @@ public extension ConnectedView {
     
     func render(
         state: S,
+        services: C,
         dispatch: @escaping Dispatch
     ) -> V {
         
         let props = map(
             state: state,
+            services: services,
             dispatch: dispatch
         )
         
         return body(props: props)
     }
     
-    var body: StoreConnector<S, Services, V> {
+    var body: StoreConnector<S, C, V> {
         return StoreConnector(content: render)
     }
 }

@@ -12,11 +12,12 @@ public struct StoreConnector<S: RefluxState, C: CoreServices, V: View>: View {
     
     @EnvironmentObject var store: Store<S, C>
     
-    let content: (S, @escaping Dispatch) -> V
+    let content: (S, C, @escaping Dispatch) -> V
     
     public var body: V {
         content(
             store.state,
+            store.services,
             store.dispatch
         )
     }
