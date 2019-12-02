@@ -10,6 +10,6 @@ public protocol Action: ReflectedStringConvertible {
     func apply(to state: RefluxState)
 }
 
-public protocol AsyncAction: Action {
+public protocol AsyncAction: Action: ReflectedStringConvertible {
     func execute(state: RefluxState?, dispatch: @escaping Dispatch)
 }

@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI.
 
 ## New
 
+## 0.0.30
+
+- Add `ReflectedStringConvertible` to `AsyncAction`
+
 ## 0.0.29
 
 - Add `ReflectedStringConvertible` protocol
