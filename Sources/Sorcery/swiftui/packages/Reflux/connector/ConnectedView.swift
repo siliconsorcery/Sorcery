@@ -10,7 +10,7 @@ import SwiftUI
 
 public protocol ConnectedView: View {
     associatedtype S: RefluxState
-    associatedtype C: CoreServices
+    associatedtype C: RefluxServices
     associatedtype Props
     associatedtype V: View
     
@@ -44,3 +44,4 @@ public extension ConnectedView {
         return StoreConnector(content: render)
     }
 }
+

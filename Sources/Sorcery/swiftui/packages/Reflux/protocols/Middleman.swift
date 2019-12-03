@@ -8,5 +8,5 @@
 
 public typealias Dispatch = (Action) -> Void
 
-public typealias Middleman<S> = (@escaping Dispatch, @escaping () -> S?)
+public typealias Middleman<S, C> = (@escaping Dispatch, @escaping () -> S?, @escaping () -> C?)
     -> (@escaping Dispatch) -> Dispatch

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct StoreProvider<S: RefluxState, C: CoreServices, V: View>: View {
+public struct StoreProvider<S: RefluxState, C: RefluxServices, V: View>: View {
     public let store: Store<S, C>
     public let content: () -> V
     

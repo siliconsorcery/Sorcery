@@ -6,10 +6,13 @@
 //  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
-public protocol Action: ReflectedStringConvertible {
+public protocol RefluxAction: ReflectedStringConvertible {}
+
+public protocol Action: RefluxAction {
     func apply(to state: RefluxState)
 }
 
 public protocol AsyncAction: Action {
-    func execute(state: RefluxState?, dispatch: @escaping Dispatch)
+//    func execute(
+    func execute(state: RefluxState?, services: RefluxServices?, dispatch: @escaping Dispatch)
 }

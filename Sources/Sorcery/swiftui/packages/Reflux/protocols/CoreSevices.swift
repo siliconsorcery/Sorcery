@@ -1,5 +1,5 @@
 //
-//  CoreServices.swift
+//  RefluxServices.swift
 //  Reflux
 //
 //  Created by John Cumming on 10/21/19.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-public protocol CoreServices {}
+public protocol RefluxServices {}
 
-public class MockCoreServices: CoreServices {
+public class MockCoreServices: RefluxServices {
     
     public let version = "Mock-AppServices-0.0.1"
     

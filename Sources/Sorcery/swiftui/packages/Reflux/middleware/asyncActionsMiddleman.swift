@@ -6,11 +6,11 @@
 //  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
 
-public let asyncActionsMiddleman: Middleman<RefluxState> = { dispatch, getState in
+public let kAsyncActionsMiddleman: Middleman<RefluxState, RefluxServices> = { dispatch, getState, getServices in
     return { next in
         return { action in
             if let action = action as? AsyncAction {
-                action.execute(state: getState(), dispatch: dispatch)
+                action.execute(state: getState(), services: getServices(), dispatch: dispatch)
             }
             return next(action)
         }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct StoreConnector<S: RefluxState, C: CoreServices, V: View>: View {
+public struct StoreConnector<S: RefluxState, C: RefluxServices, V: View>: View {
     
     @EnvironmentObject var store: Store<S, C>
     

@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-final public class Store<S: RefluxState, C: CoreServices>: ObservableObject {
+final public class Store<S: RefluxState, C: RefluxServices>: ObservableObject {
     
     @Published public var state: S
     public let services: C
@@ -20,7 +20,7 @@ final public class Store<S: RefluxState, C: CoreServices>: ObservableObject {
         
     public init(
         state: S,
-        middleman: [Middleman<S>] = [],
+        middleman: [Middleman<S, C>] = [],
         services: C
     ) {
         self.state = state
@@ -29,7 +29,7 @@ final public class Store<S: RefluxState, C: CoreServices>: ObservableObject {
         self.apply = state.apply
         
         var middleman = middleman
-        middleman.append(asyncActionsMiddleman)
+        middleman.append(kAsyncActionsMiddleman)
         self.dispatchFunction = middleman
         .reversed()
         .reduce(
@@ -38,7 +38,8 @@ final public class Store<S: RefluxState, C: CoreServices>: ObservableObject {
             { dispatchFunction, middleman in
                 let dispatch: (Action) -> Void = { [weak self] in self?.dispatch($0) }
                 let getState = { [weak self] in self?.state }
-                return middleman(dispatch, getState)(dispatchFunction)
+                let getServices = { [weak self] in self?.services }
+                return middleman(dispatch, getState, getServices)(dispatchFunction)
             }
         )
         
