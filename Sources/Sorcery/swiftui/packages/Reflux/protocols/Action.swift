@@ -12,7 +12,14 @@ public protocol Action: RefluxAction {
     func apply(to state: RefluxState)
 }
 
+//public protocol FullAction: RefluxAction {
+//    func apply(to state: RefluxState, in store: RefluxStore)
+//}
+
+public protocol ServiceAction: RefluxAction {
+    func apply(to state: RefluxState, with services: RefluxServices)
+}
+
 public protocol AsyncAction: Action {
-//    func execute(
     func execute(state: RefluxState?, services: RefluxServices?, dispatch: @escaping Dispatch)
 }

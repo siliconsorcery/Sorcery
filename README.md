@@ -1,6 +1,6 @@
 # Sorcery
 
-Helpers for iOS App development for UIKit and SwiftUI.
+Helpers for iOS App development for UIKit and SwiftUI. Built as a library and shared via the Swift Package Manager.
 
 ## New
 

@@ -10,11 +10,11 @@ import Foundation
 import SwiftUI
 import Combine
 
-final public class StoreFlux<S: RefluxState, C: RefluxServices>: ObservableObject {
+final public class StoreFlux<S: StoreFluxState, C: StoreFluxServices>: ObservableObject {
             
     public init(
         state: S,
-        middleman: [Middleman<S, C>] = [],
+        middleman: [StoreFluxMiddleman<S, C>] = [],
         services: C
     ) {
         self.state = state
@@ -23,7 +23,7 @@ final public class StoreFlux<S: RefluxState, C: RefluxServices>: ObservableObjec
         self.apply = state.apply
         
         var middleman = middleman
-        middleman.append(asyncActionsMiddleman)
+        middleman.append(kStoreFluxAsyncActionsMiddleman)
         self.dispatchFunction = middleman
         .reversed()
         .reduce(
@@ -31,7 +31,7 @@ final public class StoreFlux<S: RefluxState, C: RefluxServices>: ObservableObjec
                 self._dispatch(action: action)
             },
             { dispatchFunction, middleman in
-                let dispatch: (Action) -> Void = { [weak self] in
+                let dispatch: (StoreFluxAction) -> Void = { [weak self] in
                     self?.dispatch($0)
                 }
 
@@ -50,7 +50,7 @@ final public class StoreFlux<S: RefluxState, C: RefluxServices>: ObservableObjec
     @Published public var state: S
     public let services: C
     
-    public func dispatch(_ action: Action) {
+    public func dispatch(_ action: StoreFluxAction) {
         DispatchQueue.main.async {
             self.dispatchFunction(action)
         }
@@ -58,26 +58,49 @@ final public class StoreFlux<S: RefluxState, C: RefluxServices>: ObservableObjec
     
     // MARK: - Private
     
-    private var dispatchFunction: Dispatch!
-    private let apply: Apply
+    private var dispatchFunction: StoreFluxDispatch!
+    private let apply: StoreFluxApply
 
-    private func _dispatch(action: Action) {
+    private func _dispatch(action: StoreFluxAction) {
         state = apply(action) as! S
     }
-    
-    private let asyncActionsMiddleman: Middleman<RefluxState, RefluxServices> = { dispatch, getState, getServices in
-        return { next in
-            return { action in
-                if let action = action as? AsyncAction {
-                    action.execute(state: getState(), services: getServices(), dispatch: dispatch)
-                }
-                return next(action)
+}
+
+public let kStoreFluxAsyncActionsMiddleman: StoreFluxMiddleman<StoreFluxState, StoreFluxServices> = { dispatch, getState, getServices in
+    return { next in
+        return { action in
+            if let action = action as? StoreFluxAsyncAction {
+                action.execute(state: getState(), services: getServices(), dispatch: dispatch)
             }
+            return next(action)
         }
     }
 }
 
-public typealias StoreFluxDispatch = (Action) -> Void
+public typealias StoreFluxApply = (_ action: StoreFluxAction) -> StoreFluxState
+
+public protocol StoreFluxAction: ReflectedStringConvertible {
+    func apply(to state: StoreFluxState)
+}
+
+public protocol StoreFluxAsyncAction: StoreFluxAction {
+    func execute(state: StoreFluxState?, services: StoreFluxServices?, dispatch: @escaping StoreFluxDispatch)
+}
+
+public protocol StoreFluxState {
+    func apply(_ action: StoreFluxAction) -> StoreFluxState
+}
+
+public protocol StoreFluxServices {}
+
+public class StoreMockCoreServices: StoreFluxServices {
+    
+    public let version = "Mock-AppServices-0.0.1"
+    
+    public init() {}
+}
+
+public typealias StoreFluxDispatch = (StoreFluxAction) -> Void
 
 public typealias StoreFluxMiddleman<S, C> = (@escaping StoreFluxDispatch, @escaping () -> S?, @escaping () -> C?)
     -> (@escaping StoreFluxDispatch) -> StoreFluxDispatch
