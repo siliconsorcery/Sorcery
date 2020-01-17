@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.32
+
+- Refined Reflux implementation of Flux and Redux.
+
 ## 0.0.31
 
 - Remove `ReflectedStringConvertible` from `AsyncAction`. `AsyncAction` implements `Action` which already implements `ReflectedStringConvertible`
