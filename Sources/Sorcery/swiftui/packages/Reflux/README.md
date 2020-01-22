@@ -71,7 +71,7 @@ struct Home: View {
             Button(action: props.increment) {
                 Text("Increment")
             }
-            Button(action: { props.delayIncrement(5.0) }) {
+            Button(action: { props.delayIncrement(2.0) }) {
                 Text("Delayed")
             }
         }
@@ -89,9 +89,9 @@ struct Home: View {
     func map(_ reflux: AppReflux) -> Props {
         return Props(
             seriveVersion: "Running: \(reflux.service.version)",
-            count: "Count: \(reflux.store.countState.data.counter)",
-            increment: { reflux.dispatch(CountState.Increment()) },
-            delayIncrement: { delay in reflux.dispatch(CountState.DelayIncrement(delay: delay)) }
+            count: "Count: \(reflux.store.countStore.data.counter)",
+            increment: { reflux.dispatch(CountStore.Increment()) },
+            delayIncrement: { delay in reflux.dispatch(CountStore.DelayIncrement(delay: delay)) }
         )
     }
 }
@@ -114,7 +114,7 @@ A useful pattern is to create a nested `Model` struct to represent state.
 ``` Swift
 import Sorcery
 
-class CountState: Store, Codable {
+class CountStore: Store, Codable {
 
     var data = Model()
 
@@ -132,9 +132,9 @@ class CountState: Store, Codable {
     }
 
     class Increment: Action {
-        func apply(to: state: Store) {
-            guard let state = state as? CounterState else { return }
-            state.date.counter += 1
+        func apply(to: store: Store) {
+            guard let store = store as? CounterStore else { return }
+            store.date.counter += 1
         }
     }
 
@@ -154,7 +154,11 @@ class CountState: Store, Codable {
 }
 ```
 
-`Reflux` represents state in a single source of truth store. Define a root class implements `Store` and can be composed of substates implemented in seperate classes that also implement `Store`.
+`Reflux` manages state in a single `Store` instance. (Single Source of Truth).
+
+The base store object implements the `Store` protocol. In doing so, it provides a reducer function called `apply` that's use to mutate state.
+
+The base store object can be composed of other `Store`s objects.
 
 The `Store` protocol requires an apply function that will be called when an action is dispatched. This function acts as the reducer, it takes the current state and mutates it to a new state. SwiftUI handles the reactions to the state changes by redrawing the UI as needed. This is achieved by using and `.enviromentObject` for the `Reflux` object.
 
@@ -162,14 +166,14 @@ The `Store` protocol requires an apply function that will be called when an acti
 import Sorcery
 
 struct AppStore: Store, Codable {
-    var countState: CountState
-    var settingsState: SettingsState
-    var routerState: RouterState
+    var countStore: CountStore
+    var settingsStore: SettingsStore
+    var routerStore: RouterStore
 
     func apply(_ action: Action) -> Store {
-        action.apply(to: countState)
-        action.apply(to: settingsState)
-        action.apply(to: routerState)
+        action.apply(to: countStore)
+        action.apply(to: settingsStore)
+        action.apply(to: routerStore)
         return self
     }
 }
@@ -182,7 +186,7 @@ For example, the following middleman logs all `Actions` to the console.
 ``` Swift
 import Sorcery
 
-let kEchoMiddleman: Middleman<AppStore, AppService> = { dispatch, getState, getServices in
+let kEchoMiddleman: Middleman<AppStore, AppService> = { dispatch, getStore, getService in
     { next in
         { action in
             #if DEBUG
