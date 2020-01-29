@@ -50,7 +50,7 @@ extension UIPanGestureRecognizer {
         Initializes a pan gesture recognizer with the specificed handler
      */
     @objc
-    convenience init(handler: @escaping (UIPanGestureRecognizer) -> Void) {
+    public convenience init(handler: @escaping (UIPanGestureRecognizer) -> Void) {
         let handler = ClosureHandler<UIPanGestureRecognizer>(handler: handler)
         self.init(target: handler, action: kClosureHandlerSelector)
         setHandler(self, handler: handler)
@@ -61,7 +61,7 @@ extension UIPinchGestureRecognizer {
     /**
         Initializes a pinch gesture-recognizer with the specificed handler
      */
-    convenience init(handler: @escaping (UIPinchGestureRecognizer) -> Void) {
+    public convenience init(handler: @escaping (UIPinchGestureRecognizer) -> Void) {
         let handler = ClosureHandler<UIPinchGestureRecognizer>(handler: handler)
         self.init(target: handler, action: kClosureHandlerSelector)
         setHandler(self, handler: handler)
