@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.36
+
+- Add logging routing for console and server placeholder.
+
 ## 0.0.35
 
 - Make accessible: UIPanGestureRecognizer & UIPinchGestureRecognizer

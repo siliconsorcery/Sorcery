@@ -43,15 +43,19 @@ public enum Log {
         let dateString = Date().toString(formattedBy: "h:mm:ss.SSS")
 
         if (output == .server || output == .serverAndConsole) {
-//            let deviceId = UIDevice.current.identifierForVendor?.uuidString
-//            guard let userId = Services.authentication?.user()?.id else { fatalError() }
-//            let outputMessage = "\(dateString) \(userId) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] \(deviceId ?? "No Device")"
-//            // BOGUS: Server writes needs work!
+            let deviceId = UIDevice.current.identifierForVendor?.uuidString
+            let userId = "Unknown"
+            let outputMessage = "\(dateString) \(userId) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] \(deviceId ?? "No Device")"
+            // TODO: Add server logging
 //            print(outputMessage)
-        } else if (output == .console || output == .serverAndConsole) {
+        }
+        
+        if (output == .console || output == .serverAndConsole) {
             let outputMessage = "\(dateString) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] "
             print(outputMessage)
-        } else if (output == .echo) {
+        }
+        
+        if (output == .echo) {
             let outputMessage = "\(dateString) \(message)"
             print(outputMessage)
         }
