@@ -1,9 +1,11 @@
 //
-//  File.swift
-//  
+//  Reflux.swift
+//  Sorcery
 //
 //  Created by John Cumming on 1/7/20.
+//  Copyright © 2019 Silicon Sorcery, MIT License. https://opensource.org/licenses/MIT
 //
+// See: README.md
 
 import Foundation
 import SwiftUI
@@ -13,17 +15,17 @@ final public class Reflux<S: Store, C: Service>: ObservableObject {
             
     public init(
         store: S,
-        middleman: [Middleman<S, C>] = [],
+        middleware: [Middleware<S, C>] = [],
         service: C
     ) {
         self.store = store
         self.service = service
         
-        self.apply = store.apply
+        self.reducer = store.reducer
         
-        var middleman = middleman
-        middleman.append(kAsyncActionsMiddleman)
-        self.dispatchFunction = middleman
+        var middleware = middleware
+        middleware.append(kAsyncActionsMiddleware)
+        self.dispatchFunction = middleware
         .reversed()
         .reduce(
             { [unowned self] action in
@@ -31,7 +33,7 @@ final public class Reflux<S: Store, C: Service>: ObservableObject {
                     self._dispatch(action: action)
                 }
             },
-            { dispatchFunction, middleman in
+            { dispatchFunction, middleware in
                 let dispatch: (RefluxAction) -> Void = { [weak self] in
                     self?.dispatch($0)
                 }
@@ -43,7 +45,7 @@ final public class Reflux<S: Store, C: Service>: ObservableObject {
                 let getService = { [weak self] in
                     self?.service
                 }
-                return middleman(dispatch, getStore, getService)(dispatchFunction)
+                return middleware(dispatch, getStore, getService)(dispatchFunction)
             }
         )
     }
@@ -60,20 +62,20 @@ final public class Reflux<S: Store, C: Service>: ObservableObject {
     // MARK: - Private
     
     private var dispatchFunction: Dispatch!
-    private let apply: Apply
+    private let reducer: Reducer
 
     private func _dispatch(action: Action) {
-        store = apply(action) as! S
+        store = reducer(action) as! S
     }
 }
 
 public protocol Store {
-    func apply(_ action: Action) -> Store
+    func reducer(_ action: Action) -> Store
 }
 
 public protocol Service {}
 
-public let kAsyncActionsMiddleman: Middleman<Store, Service> = { dispatch, getStore, getService in
+public let kAsyncActionsMiddleware: Middleware<Store, Service> = { dispatch, getStore, getService in
     return { next in
         return { action in
             if let action = action as? Async {
@@ -84,7 +86,7 @@ public let kAsyncActionsMiddleman: Middleman<Store, Service> = { dispatch, getSt
     }
 }
 
-public typealias Apply = (_ action: Action) -> Store
+public typealias Reducer = (_ action: Action) -> Store
 
 public protocol RefluxAction: ReflectedStringConvertible {
 }
@@ -99,7 +101,7 @@ public protocol Async: RefluxAction {
 
 public typealias Dispatch = (RefluxAction) -> Void
 
-public typealias Middleman<S, C> = (@escaping Dispatch, @escaping () -> S?, @escaping () -> C?)
+public typealias Middleware<S, C> = (@escaping Dispatch, @escaping () -> S?, @escaping () -> C?)
     -> (@escaping Dispatch) -> Dispatch
 
 //

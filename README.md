@@ -4,6 +4,12 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.37
+
+- Refactored Reflux naming to align better with Redux. 
+- Store.apply() is now Store.reducer() 
+- Reflux.middleman is now Reflux.middleware
+
 ## 0.0.36
 
 - Add logging routing for console and server placeholder.

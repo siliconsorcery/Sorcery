@@ -43,9 +43,9 @@ public enum Log {
         let dateString = Date().toString(formattedBy: "h:mm:ss.SSS")
 
         if (output == .server || output == .serverAndConsole) {
-            let deviceId = UIDevice.current.identifierForVendor?.uuidString
-            let userId = "Unknown"
-            let outputMessage = "\(dateString) \(userId) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] \(deviceId ?? "No Device")"
+//            let deviceId = UIDevice.current.identifierForVendor?.uuidString
+//            let userId = "Unknown"
+//            let outputMessage = "\(dateString) \(userId) \(message) ➡️ in \(funcName) [\(pathLessFileName):\(lineNumber)] \(deviceId ?? "No Device")"
             // TODO: Add server logging
 //            print(outputMessage)
         }
