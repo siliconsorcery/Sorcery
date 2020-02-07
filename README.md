@@ -4,6 +4,12 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+- Testing out local edits.
+
+## 0.0.38
+
+- Add UIColor HEX conversions that include optional alpha
+
 ## 0.0.37
 
 - Refactored Reflux naming to align better with Redux. 
