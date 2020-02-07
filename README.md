@@ -6,6 +6,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 - Testing out local edits.
 
+## 0.0.39
+
+- Make UIColor HEX functions public, so that they can be used outside the library! 
+
 ## 0.0.38
 
 - Add UIColor HEX conversions that include optional alpha

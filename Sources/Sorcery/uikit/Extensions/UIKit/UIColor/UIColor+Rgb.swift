@@ -9,21 +9,6 @@
 import UIKit
 
 extension UIColor {
-    /// Create a UIColor from CGFloat RGBA components
-    ///
-    /// - Parameters:
-    ///   - r: red value
-    ///   - g: green value
-    ///   - b: blue value
-    ///   - a: alpha value
-    convenience init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        self.init(
-            red: Int(red / 255),
-            green: Int(green / 255),
-            blue: Int(blue / 255),
-            alpha: Int(alpha / 255)
-        )
-    }
 
     /// Create a UIColor from interger RGBA components.
     ///
@@ -32,7 +17,7 @@ extension UIColor {
     ///   - green: green value ( 0 - 255 )
     ///   - blue: blue value ( 0 - 255 )
     ///   - alpha: alpha value ( 0 - 255 )
-    convenience init(
+    public convenience init(
         red: Int,
         green: Int,
         blue: Int,
@@ -53,10 +38,10 @@ extension UIColor {
 
     /// Create a UIColor from a rgba hexidecimal representation
     ///
-    /// - Parameter rgba: int representation of color.
+    /// - Parameter rgb: int representation of color.
     ///  - Use hex '0x00FF00' for green
     ///  - Use hex '0x00FF0080' for green with aplha of 50%
-    convenience init(rgb: Int) {
+    public convenience init(rgb: Int) {
         if (rgb > 0xFFFFFF) {
             self.init(
                 red: (rgb >> 24) & 0xFF,
@@ -78,7 +63,7 @@ extension UIColor {
     ///
     /// - Parameter isUppercased: true, return will be in uppercase
     /// - Returns: hexidecimal string
-    func toRGBString(isUppercased: Bool = true) -> String {
+    public func toRGBString(isUppercased: Bool = true) -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
