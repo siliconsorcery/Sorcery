@@ -114,22 +114,6 @@ class ToolView: UIView {
 //        update()
     }
 
-//    override func update() {
-//        super.update()
-//
-//        let theme = ThemeManager.get().theme
-//
-//        iconImageView.image = UIImage(named: _icon)?.withRenderingMode(.alwaysTemplate)
-//        iconImageView.tintColor = theme.appColor
-//
-//        // Development: colorize views to aid debugging
-//        if (theme.isDebug) {
-//            backgroundColor = Color.red.withAlphaComponent(0.15)
-//        } else {
-//            backgroundColor = (_isSelected) ? theme.paperAltColor : Color.clear
-//        }
-//    }
-
     override var intrinsicContentSize: CGSize {
         return size
     }

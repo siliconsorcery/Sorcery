@@ -94,49 +94,7 @@ class ActionView: UIView {
             centerY: centerYAnchor,
             padding: .insets(left: 8, right: 16)
         )
-
-        // Gestures
-
-//        onTap { [weak self] _ in
-//            guard let this = self else { return }
-//            if let execute = this._delegate?.execute {
-//                if let navigateCommand = this._command as? NavigateCommand {
-//                    Log.info("Mode: \(navigateCommand.route)")
-//                }
-//                _ = execute(this._command)
-//            } else {
-//                Log.warn("No handler for ActionView")
-//            }
-//        }
-
-//        update()
     }
-
-//    override func update() {
-//        super.update()
-//        let theme = ThemeManager.get().theme
-//
-//        titleLabel.text = _title
-//        titleLabel.textColor = theme.inkColor
-//
-//        iconImageView.image = UIImage(named: _icon)?.withRenderingMode(.alwaysTemplate)
-//        iconImageView.tintColor = theme.appColor
-//
-//        var paperColor: UIColor!
-//        if let color = _backgroundColor {
-//            paperColor = (theme.isDark) ? color.reverseLightness() : color
-//        } else {
-//            paperColor = theme.paperColor
-//        }
-//        backgroundColor = (_isSelected) ? theme.paperAltColor : paperColor
-//
-//        if _hasShadow {
-//            layer.shadowColor = Color.black.cgColor
-//            layer.shadowOpacity = 0.4
-//            layer.shadowOffset = .zero
-//            layer.shadowRadius = 4.0
-//        }
-//    }
 
     override var intrinsicContentSize: CGSize {
         if let height = _height {

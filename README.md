@@ -4,7 +4,9 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
-- Testing out local edits.
+## 0.0.40
+
+- Make Stack View compatible with ZStack View 
 
 ## 0.0.39
 
