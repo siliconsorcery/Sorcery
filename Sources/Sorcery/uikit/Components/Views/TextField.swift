@@ -44,21 +44,4 @@ class TextField: UITextField {
     private func _inset(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: .insets(vertical: 8, horizontal: 16))
     }
-
-//    override func update() {
-//        let theme = ThemeManager.get().theme
-//
-//        let paperColor = theme.paperAltColor
-//        let inkColor = theme.inkColor
-//        let appColor = theme.appColor
-//
-//        backgroundColor = paperColor
-//        textColor = inkColor
-//        attributedPlaceholder = NSAttributedString(
-//            string: placeholder ?? "",
-//            attributes: [
-//                NSAttributedString.Key.foregroundColor: appColor
-//            ]
-//        )
-//    }
 }

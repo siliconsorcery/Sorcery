@@ -41,23 +41,4 @@ class SeparatorView: UIView {
             return frame.size
         }
     }
-
-//    override func update() {
-//        let theme = ThemeManager.get().theme
-//
-//        var paperColor: UIColor!
-//        if let color = _backgroundColor {
-//            paperColor = (theme.isDark) ? color.reverseLightness() : color
-//        } else {
-//            paperColor = theme.paperAltColor
-//        }
-//        backgroundColor = paperColor
-//
-//        if _hasShadow {
-//            layer.shadowColor = Color.black.cgColor
-//            layer.shadowOpacity = 0.4
-//            layer.shadowOffset = .zero
-//            layer.shadowRadius = 4.0
-//        }
-//    }
 }

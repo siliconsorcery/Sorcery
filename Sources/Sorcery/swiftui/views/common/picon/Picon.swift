@@ -24,7 +24,7 @@ public struct Picon: View {
         
         return GeometryReader { outer in
             GeometryReader { geometry in
-                ZStack {
+                Stack {
                     if props.hasImage {
                         props.image!
                         .resizable()

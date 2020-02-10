@@ -59,10 +59,8 @@ import SwiftUI
 
 struct Home: View {
 
-    @EnvironmentObject var reflux: AppReflux
-
     var body: some View {
-        let props = map(reflux)
+        let props = map()
         
         return Column {
             Text("Hello Again")
@@ -77,21 +75,23 @@ struct Home: View {
         }
     }
     
-    // MARK: - Props
+    // MARK: - Properties
     
-    struct Props {
+    @EnvironmentObject var reflux: AppReflux
+    
+    private struct Props {
         let seriveVersion: String
         let count: String
         let increment: () -> Void
         let delayIncrement: (Double) -> Void
     }
     
-    func map(_ reflux: AppReflux) -> Props {
+    private func map() -> Props {
         return Props(
-            seriveVersion: "Running: \(reflux.service.version)",
-            count: "Count: \(reflux.store.countStore.data.counter)",
-            increment: { reflux.dispatch(CountStore.Increment()) },
-            delayIncrement: { delay in reflux.dispatch(CountStore.DelayIncrement(delay: delay)) }
+            seriveVersion: "Running: \(reflux.service.version)"
+            ,count: "Count: \(reflux.store.countStore.data.counter)"
+            ,increment: { self.reflux.dispatch(CountStore.Increment()) }
+            ,delayIncrement: { delay in self.reflux.dispatch(CountStore.DelayIncrement(delay: delay)) }
         )
     }
 }
@@ -125,7 +125,17 @@ class CountStore: Store, Codable {
     init() {
         self.counter = 0
     }
-
+    
+    init() {}
+    
+    required init(from decoder: Decoder) throws {
+        Log.task()
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        Log.task()
+    }
+    
     func apply(_ action: Action) -> {
         action.apply(to: self)
         retun self
@@ -218,9 +228,20 @@ import Sorcery
 
 class AppService: Service {
     
-    var version: String = "AppService-0.0.1"
+    let version: String = {
+        if let dictionary = Bundle.main.infoDictionary {
+            let version = dictionary["CFBundleShortVersionString"] as? String
+            let build = dictionary["CFBundleVersion"] as? String
+            let branch = dictionary["SourceBranch"] as? String
+            return "\(version ?? "?") (\(build ?? "?")) - \(branch ?? "?")"
+        } else {
+            return "Version ? (?)"
+        }
+    } ()
     
     static var singleton = AppService()
+
+    Log.info("\n\nRunning - App Version: \(version)\n\n")
 
     var authentication: AuthenticationDelegate?
     var database: DatabaseDelegate?
