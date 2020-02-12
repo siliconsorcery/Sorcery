@@ -4,6 +4,12 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.41
+
+- Fix: color conversion from hexString with alpha. 
+- New UIColor.init(fromHex: String) and UIColor.toHex(…)
+- Removed UIColor.toRGBString(…)
+
 ## 0.0.40
 
 - Make Stack View compatible with ZStack View 
