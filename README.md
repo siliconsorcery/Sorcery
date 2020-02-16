@@ -4,6 +4,18 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.42
+
+- Rewrite 'Reflux' to allow for Protocols in Generics. Allows for mock store and mock service. 
+- This breaks all Async actions, new version ( Replace <> with domain content )
+```class <Action>: Async {
+    func apply(reflux: AnyObject) {
+        guard let reflux = reflux as? <App>Reflux else { return }
+        <Preform Async Actions>
+    }
+}
+```
+
 ## 0.0.41
 
 - Fix: color conversion from hexString with alpha. 
