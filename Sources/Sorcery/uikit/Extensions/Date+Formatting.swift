@@ -23,7 +23,6 @@ extension Date {
     ) -> String {
         let isPast: Bool = (self < now)
         if isPast {
-            Log.task("Past")
             if years(from: now) < 0 {
                 return "\(-years(from: now)) year" + (years(from: now) < -1 ? "s" : "") + " ago"
             }
@@ -76,8 +75,7 @@ extension Date {
                 return relativeDay(to: now)
             }
         }
-        Log.warn("Really!")
-        return "WTF"
+        return ""
     }
     
     public func relativeDay(
@@ -93,7 +91,6 @@ extension Date {
         case 1:
             return "Tomorrow"
         default:
-            Log.warn("Outside expected date range, returning empty string")
             return ""
         }
     }

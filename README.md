@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.43
+
+- Removed Logging from Data+Formatting
+
 ## 0.0.42
 
 - Rewrite 'Reflux' to allow for Protocols in Generics. Allows for mock store and mock service. 
