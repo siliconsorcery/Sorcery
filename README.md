@@ -4,6 +4,13 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.44
+
+- Card
+- ItemCache
+- CachedImage
+- ImageLoader
+
 ## 0.0.43
 
 - Removed Logging from Data+Formatting
