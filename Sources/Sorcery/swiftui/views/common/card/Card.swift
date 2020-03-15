@@ -11,10 +11,10 @@ import SwiftUI
 public struct Card: View {
 
     public var body: some View {
-        Column {
-            Image(props.image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+        let props = map()
+        
+        return Column {
+            CachedImage(for: props.image)
                 .background(Color.yellow)
          
             Row(.leading) {
@@ -29,7 +29,13 @@ public struct Card: View {
                         .foregroundColor(.primary)
                         .lineLimit(3)
                     
-                    Text(props.author.uppercased())
+                    if props.description.isEmpty == false {
+                        Text(props.description)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
+                    }
+                    
+                    Text(props.author)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -65,42 +71,57 @@ public struct Card: View {
         .shadow(radius: 8.0)
     }
     
-    // MARK: - Required
-    
-    var props: CardModel
-    
-    public init(
-        props: CardModel
-    ) {
-        self.props = props
-    }
-    
-}
+    // MARK: - Properties
 
-public struct CardModel: Identifiable {
+    public var model: Model
     
-    // MARK: - Optional
-    
-    public var id: UUID
-    
-    // MARK: - Required
-    
-    public var image: String
-    public var category: String
-    public var heading: String
-    public var author: String
-    
-    public init(
-        id: UUID? = nil,
-        image: String,
-        category: String,
-        heading: String,
-        author: String
-    ) {
-        self.id = id ?? UUID()
-        self.image = image
-        self.category = category
-        self.heading = heading
-        self.author = author
+    public init(_ model: Model) {
+        self.model = model
     }
+    
+    public struct Model: Identifiable {
+        
+        public var id: UUID
+        
+        public var image: String
+        public var category: String
+        public var heading: String
+        public var description: String
+        public var author: String
+        
+        public init(
+            id: UUID? = nil
+            ,image: String
+            ,category: String
+            ,heading: String
+            ,description: String
+            ,author: String
+        ) {
+            self.id = id ?? UUID()
+            self.image = image
+            self.category = category
+            self.heading = heading
+            self.description = description
+            self.author = author
+        }
+    }
+    
+    private struct Props {
+        let image: String
+        let category: String
+        let heading: String
+        let description: String
+        let author: String
+    }
+    
+    private func map() -> Props {
+        return Props(
+            image: model.image
+            ,category: model.category
+            ,heading: model.heading
+            ,description: model.description
+            ,author: model.author.uppercased()
+        )
+    }
+
 }

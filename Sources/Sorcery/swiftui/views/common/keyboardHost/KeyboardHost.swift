@@ -16,7 +16,7 @@ public struct KeyboardHost<Content: View>: View {
     public var body: some View {
         VStack {
             view
-            .padding(.bottom, keyboardHeight)
+                .padding(.bottom, keyboardHeight)
         }
         .onReceive(showPublisher.merge(with: hidePublisher)) { height in
             withAnimation(.spring()) {
@@ -25,16 +25,14 @@ public struct KeyboardHost<Content: View>: View {
         }
     }
     
-    // MARK: - Required
+    // MARK: - Properties
 
     let view: Content
 
     public init(@ViewBuilder content: () -> Content) {
         view = content()
     }
-    
-    // MARK: - Private
-    
+       
     @State private var keyboardHeight: CGFloat = 0
 
     private let showPublisher = NotificationCenter
@@ -44,7 +42,7 @@ public struct KeyboardHost<Content: View>: View {
         )
         .map { notification -> CGFloat in
             if let rect = notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
-                return rect.size.height
+                return rect.size.height - 34.0 // HACK
             } else {
                 return 0
             }

@@ -8,21 +8,36 @@
 
 import SwiftUI
 
-public struct DragModifier: ViewModifier {
+public struct HintModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
-        content
+        let props = map()
+        
+        return content
             .frame(width: 30, height: 4)
-            .background(Color.red)
+            .background(props.key)
             .opacity(0.25)
             .cornerRadius(2)
             .padding([.top], 8)
     }
+    
+    let key: Color
+
+    private struct Props {
+        let key: Color
+    }
+    
+    private func map() -> Props {
+        return Props(
+            key: key
+        )
+    }
+    
 }
 
 extension View {
 
-    public func dragMod() -> some View {
-        self.modifier(DragModifier())
+    public func dragHint(key: Color) -> some View {
+        self.modifier(HintModifier(key: key))
     }
 }

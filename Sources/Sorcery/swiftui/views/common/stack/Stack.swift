@@ -13,6 +13,8 @@ public struct Stack<Content: View>: View {
     public var body: some View {
         
         ZStack(alignment: aligmnent) {
+            Color.clear
+            
             self.content
         }
         

@@ -14,6 +14,7 @@ public struct RectData: Equatable {
 }
 
 public struct RectPreferenceKey: PreferenceKey {
+    
     public typealias Value = [RectData]
     
     public static var defaultValue: [RectData] = []
@@ -44,7 +45,7 @@ public struct RectFor: View {
         }
     }
     
-    // MARK: - Required
+    // MARK: - Properties
 
     let id: Int
 }
@@ -56,7 +57,7 @@ public struct RectPreferenceModifier: ViewModifier {
             .background(RectFor(id: id))
     }
     
-    // MARK: - Required
+    // MARK: - Properties
 
     var id: Int
 }

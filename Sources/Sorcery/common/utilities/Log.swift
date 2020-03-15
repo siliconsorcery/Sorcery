@@ -180,7 +180,7 @@ public enum Log {
             lineNumber: lineNumber
         )
 
-        Alert.show(title: "Sorry!", message: "\(message)")
+        // Alert.show(title: "Sorry!", message: "\(message)")
     }
     
     public static func echo(
