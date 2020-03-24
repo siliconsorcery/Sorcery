@@ -56,6 +56,20 @@ public struct Avatar: View {
     var icon: Image?
     var alt: String = "??"
     
+    public init(
+        color: Color? = nil
+        ,activeColor: Color? = nil
+        ,image: Image? = nil
+        ,icon: Image? = nil
+        ,alt: String? = nil
+    ) {
+        self.color = color ?? .white
+        self.activeColor = activeColor ?? Color(UIColor.link)
+        self.image = image
+        self.icon = icon
+        self.alt = alt ?? "??"
+    }
+    
     private struct Props {
         let color: Color
         let activeColor: Color
