@@ -4,6 +4,11 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.45
+
+- Remove DispatchQueue.main.async in Reflux for performance testing
+- Fix Stack, remove Color.clear
+
 ## 0.0.44
 
 - Card
