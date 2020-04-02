@@ -18,7 +18,7 @@ final public class Reflux<STORE, SERVICE>: ObservableObject {
     private var middleware: [(Reflux, RefluxAction) -> Bool] = []
     
     public func dispatch(_ action: RefluxAction) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             var processAction = true
             
             for handler in self.middleware {
@@ -36,7 +36,7 @@ final public class Reflux<STORE, SERVICE>: ObservableObject {
                     action.apply(reflux: self)
                 }
             }
-        }
+//        }
     }
     
     public init(
