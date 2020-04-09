@@ -11,8 +11,9 @@ import SwiftUI
 public struct VSpacer: View {
     
     public var body: some View {
-        Spacer()
-        .frame(height: height)
+        Log.task("Depricated: Use Pad(height:) instead")
+        return Spacer()
+            .frame(height: height)
     }
     
     // MARK: - Optional

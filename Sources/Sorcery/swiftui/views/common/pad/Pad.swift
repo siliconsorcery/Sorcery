@@ -1,28 +1,30 @@
 //
-//  HSpacer.swift
+//  Pad.swift
 //  Sorcery
 //
-//  Created by John Cumming on 11/18/19.
+//  Created by John Cumming on 4/9/20.
 //  Copyright © Silicon Sorcery. All rights reserved.
 //
 
 import SwiftUI
 
-public struct HSpacer: View {
+public struct Pad: View {
     
     public var body: some View {
-        Log.task("Depricated: Use Pad(width:) instead")
         return Spacer()
-            .frame(width: width)
+            .frame(width: width, height: height)
     }
     
-    // MARK: - Optional
+    // MARK: - Properties
 
     var width: CGFloat
-
+    var height: CGFloat
+    
     public init(
         width: CGFloat = 16
+        ,height: CGFloat = 16
     ) {
         self.width = width
+        self.height = height
     }
 }

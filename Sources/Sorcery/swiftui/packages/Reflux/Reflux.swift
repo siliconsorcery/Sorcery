@@ -18,7 +18,13 @@ final public class Reflux<STORE, SERVICE>: ObservableObject {
     private var middleware: [(Reflux, RefluxAction) -> Bool] = []
     
     public func dispatch(_ action: RefluxAction) {
-//        DispatchQueue.main.async {
+        
+//        guard Thread.isMainThread else {
+//            Log.warn("Dispatching must be done on the main thread, while performance testing!")
+//            return
+//        }
+        
+        DispatchQueue.main.async {
             var processAction = true
             
             for handler in self.middleware {
@@ -36,7 +42,7 @@ final public class Reflux<STORE, SERVICE>: ObservableObject {
                     action.apply(reflux: self)
                 }
             }
-//        }
+        }
     }
     
     public init(

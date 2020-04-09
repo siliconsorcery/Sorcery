@@ -4,6 +4,11 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.46
+
+- Add Pad(width:, height:) for adding sized padding/spacing. Use to replace VSpacer() and HSpacer()
+- Reinstated DispatchQueue.main.async in Reflux
+
 ## 0.0.45
 
 - Remove DispatchQueue.main.async in Reflux for performance testing
