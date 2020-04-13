@@ -270,19 +270,19 @@ extension UIColor {
         /// Returns the model as an RGB tuple
         public var rgb: (r: CGFloat, g: CGFloat, b: CGFloat) {
             switch self {
-            case .rgb(let rgb):
-                return rgb
+            case .rgb(_, _, _):
+                return self.rgb
 
-            case .hsl(let h, let s, let l):
+            case let .hsl(h, s, l):
                 return convert(hsl: h, s, l)
 
-            case .hsb(let h, let s, let b):
+            case let .hsb(h, s, b):
                 return convert(hsb: h, s, b)
 
-            case .cmyk(let c, let m, let y, let k):
+            case let .cmyk(c, m, y, k):
                 return convert(cmyk: c, m, y, k)
 
-            case .hex(let hex):
+            case let .hex(hex):
                 return convert(hex: hex)
             }
         }
@@ -290,11 +290,11 @@ extension UIColor {
         /// Returns the model as an HSL tuple
         public var hsl: (h: CGFloat, s: CGFloat, l: CGFloat) {
             switch self {
-            case .rgb(let r, let g, let b):
+            case let .rgb(r, g, b):
                 return convert(rgb: r, g, b)
 
-            case .hsl(let hsl):
-                return hsl
+            case .hsl(_, _, _):
+                return self.hsl
 
             case .hsb, .cmyk, .hex:
                 let (r, g, b) = self.rgb
@@ -305,37 +305,37 @@ extension UIColor {
         /// Returns the model as an HSB tuple
         public var hsb: (h: CGFloat, s: CGFloat, b: CGFloat) {
             switch self {
-            case .rgb(let r, let g, let b):
+            case let .rgb(r, g, b):
                 return convert(rgb: r, g, b)
 
             case .hsl, .cmyk, .hex:
                 let (r, g, b) = self.rgb
                 return convert(rgb: r, g, b)
 
-            case .hsb(let hsb):
-                return hsb
+            case .hsb(_, _, _):
+                return self.hsb
             }
         }
 
         /// Returns the model as a CMYK tuple
         public var cmyk: (c: CGFloat, m: CGFloat, y: CGFloat, k: CGFloat) {
             switch self {
-            case .rgb(let r, let g, let b):
+            case let .rgb(r, g, b):
                 return convert(rgb: r, g, b)
 
             case .hsl, .hsb, .hex:
                 let (r, g, b) = self.rgb
                 return convert(rgb: r, g, b)
 
-            case .cmyk(let cmyk):
-                return cmyk
+            case .cmyk(_, _, _, _):
+                return self.cmyk
             }
         }
 
         /// Returns the model as a UInt32 (hex) value
         public var hex: UInt32 {
             switch self {
-            case .rgb(let r, let g, let b):
+            case let .rgb(r, g, b):
                 return convert(rgb: r, g, b)
 
             case .hsl, .hsb, .cmyk:

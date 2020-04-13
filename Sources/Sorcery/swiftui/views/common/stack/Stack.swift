@@ -13,6 +13,7 @@ public struct Stack<Content: View>: View {
     public var body: some View {
         
         ZStack(alignment: aligmnent) {
+            if expanded { FullFrame() }
             self.content
         }
     }
@@ -20,13 +21,16 @@ public struct Stack<Content: View>: View {
     public var content: Content
     
     var aligmnent: SwiftUI.Alignment
+    var expanded: Bool
     
     public init(
-        _ alignment: SwiftUI.Alignment = .center,
-        @ViewBuilder build: () -> Content
+        _ alignment: SwiftUI.Alignment = .center
+        ,expanded: Bool = false
+        ,@ViewBuilder build: () -> Content
     ) {
         self.content = build()
         self.aligmnent = alignment
+        self.expanded = expanded
     }
     
 }

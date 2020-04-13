@@ -42,7 +42,7 @@ public struct KeyboardHost<Content: View>: View {
         )
         .map { notification -> CGFloat in
             if let rect = notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
-                return rect.size.height - 34.0 // HACK
+                return rect.size.height // - 34.0 // HACK
             } else {
                 return 0
             }

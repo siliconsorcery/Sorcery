@@ -4,6 +4,12 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.47
+
+- Reenable Log.error() to Alert()
+- FullFrame(), to use instead of Color.clear
+- Stack, add Color.clear as an optional.   Stack(expanded: true)
+
 ## 0.0.46
 
 - Add Pad(width:, height:) for adding sized padding/spacing. Use to replace VSpacer() and HSpacer()
