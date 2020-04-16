@@ -16,23 +16,23 @@ public struct Column<Content: View>: View {
         
         return HStack(alignment: vertical, spacing: spacing) {
             if (horizontal == .trailing) {
-                Spacer()
+                Spacer(minLength: 0)
             }
             
             VStack(alignment: horizontal, spacing: spacing) {
                 if (vertical == .bottom) {
-                    Spacer()
+                    Spacer(minLength: 0)
                 }
                 
                 content
                 
                 if (vertical == .top) {
-                    Spacer()
+                    Spacer(minLength: 0)
                 }
             }
             
             if (horizontal == .leading) {
-                Spacer()
+                Spacer(minLength: 0)
             }
         }
     }

@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.48
+
+- Add Spacer(minLength: 0) to Column() and Row() Views
+
 ## 0.0.47
 
 - Reenable Log.error() to Alert()
