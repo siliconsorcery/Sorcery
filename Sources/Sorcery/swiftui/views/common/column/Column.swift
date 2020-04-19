@@ -49,17 +49,25 @@ public struct Column<Content: View>: View {
     var spacing: CGFloat?
     
     public init(
-        _ alignment: SwiftUI.Alignment = .center,
-        tight: Bool = false,
-        spacing: CGFloat? = nil,
-        @ViewBuilder build: () -> Content
+        _ alignment: SwiftUI.Alignment = .center
+        ,horizontal: SwiftUI.HorizontalAlignment? = nil
+        ,vertical: SwiftUI.VerticalAlignment? = nil
+        ,tight: Bool = false
+        ,spacing: CGFloat? = nil
+        ,@ViewBuilder build: () -> Content
     ) {
         self.tight = tight
         self.spacing = spacing
         self.content = build()
         
-        self.horizontal = horizontalAlignment(from: alignment)
-        self.vertical = verticalAlignment(from: alignment)
+        
+        self.horizontal = (horizontal != nil)
+            ? horizontal!
+            : horizontalAlignment(from: alignment)
+        
+        self.vertical = (vertical != nil)
+            ? vertical!
+            : verticalAlignment(from: alignment)
     }
     
     private func horizontalAlignment(from alignment: SwiftUI.Alignment) -> SwiftUI.HorizontalAlignment {
