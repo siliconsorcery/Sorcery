@@ -14,12 +14,12 @@ public struct Column<Content: View>: View {
         
         let vertical = tight ? .center : self.vertical
         
-        return HStack(alignment: vertical, spacing: spacing) {
+        return HStack(alignment: vertical, spacing: horizontalSpacing) {
             if (horizontal == .trailing) {
                 Spacer(minLength: 0)
             }
             
-            VStack(alignment: horizontal, spacing: spacing) {
+            VStack(alignment: horizontal, spacing: verticalSpacing) {
                 if (vertical == .bottom) {
                     Spacer(minLength: 0)
                 }
@@ -46,7 +46,8 @@ public struct Column<Content: View>: View {
     var horizontal: SwiftUI.HorizontalAlignment = .center
     var vertical: SwiftUI.VerticalAlignment = .center
     var tight: Bool
-    var spacing: CGFloat?
+    var horizontalSpacing: CGFloat?
+    var verticalSpacing: CGFloat?
     
     public init(
         _ alignment: SwiftUI.Alignment = .center
@@ -57,9 +58,18 @@ public struct Column<Content: View>: View {
         ,@ViewBuilder build: () -> Content
     ) {
         self.tight = tight
-        self.spacing = spacing
         self.content = build()
         
+        if horizontal == nil && vertical == nil {
+            self.horizontalSpacing = spacing
+            self.verticalSpacing = spacing
+        }
+        if horizontal != nil {
+            self.horizontalSpacing = spacing
+        }
+        if vertical != nil {
+            self.verticalSpacing = spacing
+        }
         
         self.horizontal = (horizontal != nil)
             ? horizontal!

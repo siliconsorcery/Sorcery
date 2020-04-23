@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.50
+
+- Improve spacing in Column()
+
 ## 0.0.49
 
 - Add support from alignmentGuides in Row() and Column()
