@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.51
+
+- Refactored Reflux ( Order = ( Action: to change state, Command: that can disptach(Action) to change state )
+
 ## 0.0.50
 
 - Improve spacing in Column()

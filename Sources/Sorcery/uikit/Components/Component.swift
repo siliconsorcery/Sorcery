@@ -16,7 +16,7 @@ class Component: UIView {
 
     // MARK: - Properties
 
-    var onCommand: ((Command) -> (Response?))?
+    var onCommand: ((Order) -> (Response?))?
 
     // Refactor onChange to onCommand(), for now allow both and Log.warn()
     var onChange: ((String) -> (Bool))?
@@ -43,7 +43,7 @@ class Component: UIView {
     /// - Parameter command: command to run
     /// - Returns: response
     @discardableResult
-    func on(_ command: Command) -> Response? {
+    func on(_ command: Order) -> Response? {
         return onCommand?(command)
     }
 

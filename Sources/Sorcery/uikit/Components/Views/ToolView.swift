@@ -15,7 +15,7 @@ class ToolView: UIView {
         _ delegate: ExecuteProtocol? = nil,
         title: String = "",
         icon: String,
-        command: Command = NilCommand(),
+        command: Order = NilOrder(),
         backgroundColor: UIColor? =  nil,
         size: CGSize? = nil,
         frame: CGRect? = nil,
@@ -48,7 +48,7 @@ class ToolView: UIView {
     private var _title: String
     private var _icon: String
     private var _backgroundColor: UIColor?
-    private var _command: Command = NilCommand()
+    private var _command: Order = NilOrder()
 
     private var _isSelected: Bool = false
     var isSelected: Bool {
@@ -104,7 +104,7 @@ class ToolView: UIView {
 
     func change(
         icon: String? = nil,
-        command: Command? = nil,
+        command: Order? = nil,
         backgroundColor: UIColor? =  nil
     ) {
         _icon = icon ?? _icon

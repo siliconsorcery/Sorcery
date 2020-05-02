@@ -15,7 +15,7 @@ class ActionView: UIView {
         _ delegate: ExecuteProtocol? = nil,
         title: String = "",
         icon: String,
-        command: Command = NilCommand(),
+        command: Order = NilOrder(),
         frame: CGRect? = nil,
         height: CGFloat? = 40.0,
         backgroundColor: UIColor? =  nil,
@@ -49,7 +49,7 @@ class ActionView: UIView {
     private var _height: CGFloat?
     private var _backgroundColor: UIColor?
     private var _hasShadow: Bool
-    private var _command: Command = NilCommand()
+    private var _command: Order = NilOrder()
     private var _isSelected: Bool = false
 
     // MARK: - Views
