@@ -49,7 +49,7 @@ final public class Reflux<STORE, SERVICE>: ObservableObject {
                         let pending = self.pending
                         self.pending.removeAll()
                         
-                        if pending.count > 1 { Log.echo("🚀Asynced: \(pending.count) Actions") }
+                        if pending.count > 1 { Log.echo("🚀 Asynced: \(pending.count) Actions") }
                         var store = self.store as! Store
                         for action in pending {
                             store = store.reducer(action)
