@@ -98,11 +98,19 @@ extension Date {
             } else {
                 if hour > 0 {
                     let hours = hour + ((minute % 60) < 30 ? 0 : 1)
-                    return "in \(hours) hour\(hours > 1 ? "s" : "")"
+                    if hours == 24 {
+                        return "in 1 day"
+                    } else {
+                        return "in \(hours) hour\(hours > 1 ? "s" : "")"
+                    }
                 }
                 if minute > 0 {
                     let minutes = minute + ((second % 60) < 30 ? 0 : 1)
-                    return "in \(minutes) minute\(minutes > 1 ? "s" : "")"
+                    if minutes == 60 {
+                        return "in 1 hour"
+                    } else {
+                        return "in \(minutes) minute\(minutes > 1 ? "s" : "")"
+                    }
                 }
                 return "Just now"
             }
