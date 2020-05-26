@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.53
+
+- Refactor Date.relative()
+
 ## 0.0.52
 
 - Add TriFlixStore, new simpler yet powerfull state management using closures for actions that mutate the single source of truth store. actions are batched for execution at end of frame and can provide custom logging messages.

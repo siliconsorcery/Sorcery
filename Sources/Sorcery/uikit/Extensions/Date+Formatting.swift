@@ -18,70 +18,101 @@ extension Date {
     }
     
     public func relative(
-        to now: Date = Date(),
-        showTime: Bool = true
+        to now: Date? = nil
+        ,showTime: Bool = true
     ) -> String {
-        let isPast: Bool = (self < now)
+        
+        let now = now ?? Date()
+                
+        let this = Calendar
+            .current
+            .dateComponents(
+                [.year, .month, .weekOfYear, .day, .hour, .minute, .second]
+                ,from: now
+                ,to: self
+            )
+        
+        let year = this.year ?? 0
+        let month = this.month ?? 0
+        let weekOfYear = this.weekOfYear ?? 0
+        let day = this.day ?? 0
+        let hour = this.hour ?? 0
+        let minute = this.minute ?? 0
+        let second = this.second ?? 0
+        
+        let isPast = (self < now)
         if isPast {
-            if years(from: now) < 0 {
-                return "\(-years(from: now)) year" + (years(from: now) < -1 ? "s" : "") + " ago"
+            if year < 0 {
+                let years = -year + ((-month % 12) < 6 ? 0 : 1)
+                return "\(years) year\(years > 1 ? "s" : "") ago"
             }
-            if months(from: now) < 0 {
-                return "\(-months(from: now)) month" + (months(from: now) < -1 ? "s" : "") + " ago"
+            if month < 0 {
+                let months = -month + ((-day % 30) < 15 ? 0 : 1)
+                return "\(months) month\(months > 1 ? "s" : "") ago"
+
             }
-            if weeks(from: now) < 0 {
-                return "\(-weeks(from: now)) week" + (weeks(from: now) < -1 ? "s" : "") + " ago"
+            if weekOfYear < 0 {
+                let weeks = -weekOfYear + ((-day % 7) < 4 ? 0 : 1)
+                return "\(weeks) week\(weeks > 1 ? "s" : "") ago"
             }
-            if showTime {
-                if days(from: now) < 0 {
-                    return "\(-days(from: now)) day" + (days(from: now) < -1 ? "s" : "") + " ago"
-                }
-                if hours(from: now) < 0 {
-                    return "\(-hours(from: now)) hour" + (hours(from: now) < -1 ? "s" : "") + " ago"
-                }
-                if minutes(from: now) < 0 {
-                    return "\(-minutes(from: now)) minute" + (minutes(from: now) < -1 ? "s" : "") + " ago"
-                }
-                if seconds(from: now) <= 0 {
-                    return seconds(from: now) < 15 ? "Just now" : "\(-seconds(from: now)) second" + (seconds(from: now) < -1 ? "s" : "") + " ago"
-                }
-            } else {
+            if day < 0 {
+                let days = -day + ((-hour % 24) < 12 ? 0 : 1)
+                return "\(days) day\(days > 1 ? "s" : "") ago"
+            }
+            
+            if showTime == false {
                 return relativeDay(to: now)
+            } else {
+                if hour < 0 {
+                    let hours = -hour + ((-minute % 60) < 30 ? 0 : 1)
+                    return "\(hours) hour\(hours > 1 ? "s" : "") ago"
+                }
+                if minute < 0 {
+                    let minutes = -minute + ((-second % 60) < 30 ? 0 : 1)
+                    return "\(minutes) minute\(minutes > 1 ? "s" : "") ago"
+                }
+                return "Just now"
             }
+            
         } else {
-            if years(from: now) > 0 {
-                return "in \(years(from: now)) year" + (years(from: now) > 1 ? "s" : "")
+            if year > 0 {
+                let years = year + ((month % 12) < 6 ? 0 : 1)
+                return "in \(years) year\(years > 1 ? "s" : "")"
             }
-            if months(from: now) > 0 {
-                return "in \(months(from: now)) month" + (months(from: now) > 1 ? "s" : "")
+            if month > 0 {
+                let months = month + ((day % 30) < 15 ? 0 : 1)
+                return "in \(months) month\(months > 1 ? "s" : "")"
+
             }
-            if weeks(from: now) > 0 {
-                return "in \(weeks(from: now)) week" + (weeks(from: now) > 1 ? "s" : "")
+            if weekOfYear > 0 {
+                let weeks = weekOfYear + ((day % 7) < 4 ? 0 : 1)
+                return "in \(weeks) week\(weeks > 1 ? "s" : "")"
             }
-            if showTime {
-                if days(from: now) > 0 {
-                    return "in \(days(from: now)) day" + (days(from: now) > 1 ? "s" : "")
-                }
-                if hours(from: now) > 0 {
-                    return "in \(hours(from: now)) hour" + (hours(from: now) > 1 ? "s" : "")
-                }
-                if minutes(from: now) > 0 {
-                    return "in \(minutes(from: now)) minute" + (minutes(from: now) > 1 ? "s" : "")
-                }
-                if seconds(from: now) >= 0 {
-                    return seconds(from: now) < 15 ? "Just now" : "in \(seconds(from: now)) second" + (seconds(from: now) > 1 ? "s" : "")
-                }
-            } else {
+            if day > 0 {
+                let days = day + ((hour % 24) < 12 ? 0 : 1)
+                return "in \(days) day\(days > 1 ? "s" : "")"
+            }
+            
+            if showTime == false {
                 return relativeDay(to: now)
+            } else {
+                if hour > 0 {
+                    let hours = hour + ((minute % 60) < 30 ? 0 : 1)
+                    return "in \(hours) hour\(hours > 1 ? "s" : "")"
+                }
+                if minute > 0 {
+                    let minutes = minute + ((second % 60) < 30 ? 0 : 1)
+                    return "in \(minutes) minute\(minutes > 1 ? "s" : "")"
+                }
+                return "Just now"
             }
         }
-        return ""
     }
     
     public func relativeDay(
         to now: Date = Date()
-    ) -> String
-    {
+    ) -> String {
+        
         let relativeDays = self.removeTime().days(from: now.removeTime())
         switch relativeDays {
         case -1:
@@ -173,7 +204,7 @@ extension Date {
     ///
     /// - Parameter date: date to calculate against
     /// - Returns: int - number of days
-    func days(from date: Date) -> Int {
+    public func days(from date: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
     }
 
@@ -218,15 +249,22 @@ extension Date {
     /// - Parameters:
     ///   - plusHour: round to hours
     ///   - roundedMinutes: round to minutes
+    ///   - reversed: previous time point
     /// - Returns: new rounded date
-    public func bumpTo(plusHour: Int = 0, roundedMinutes: Int = 15) -> Date {
+    public func bumpTo(
+        plusHour: Int = 0
+        ,roundedMinutes: Int = 15
+        ,reversed: Bool = false
+    ) -> Date {
+        let reversed = reversed ? -1 : 1
         var parts = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute, .second, .weekday], from: self)
         if (plusHour != 0) {
-            parts.hour = parts.hour! + plusHour
+            parts.hour = parts.hour! + plusHour * reversed
             parts.minute = 0
             parts.second = 0
         } else {
-            parts.minute = -roundedMinutes - parts.minute! % roundedMinutes
+            let bump = roundedMinutes - parts.minute! % roundedMinutes * reversed
+            parts.minute = parts.minute! + bump * reversed
             parts.second = 0
         }
         guard let newDate = Calendar.current.date(from: parts) else { fatalError() }
