@@ -90,7 +90,11 @@ extension Date {
             }
             if day > 0 {
                 let days = day + ((hour % 24) < 12 ? 0 : 1)
-                return "in \(days) day\(days > 1 ? "s" : "")"
+                if days == 7 {
+                    return "in 1 week"
+                } else {
+                    return "in \(days) day\(days > 1 ? "s" : "")"
+                }
             }
             
             if showTime == false {
