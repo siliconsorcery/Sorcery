@@ -180,7 +180,9 @@ public enum Log {
             lineNumber: lineNumber
         )
 
-        Alert.show(title: "Sorry!", message: "\(message)")
+        DispatchQueue.main.async {
+            Alert.show(title: "Sorry!", message: "\(message)")
+        }
     }
     
     public static func echo(
