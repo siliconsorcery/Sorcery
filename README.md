@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.56
+
+- Add .modifers for .tap .over & .under
+
 ## 0.0.55
 
 - Wrap Log.error()'s Alert.show() with DispatchQueue.main.async. 
