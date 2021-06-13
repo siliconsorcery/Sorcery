@@ -9,6 +9,7 @@
 import UIKit
 
 extension Date {
+    
     public var timestamp: Int64 {
         return Int64((self.timeIntervalSince1970 * 1_000.0))
     }
@@ -17,6 +18,7 @@ extension Date {
         self = Date(timeIntervalSince1970: TimeInterval(timestamp) / 1_000.0)
     }
     
+    /// Relative
     public func relative(
         to now: Date? = nil
         ,showTime: Bool = true
@@ -34,7 +36,7 @@ extension Date {
         
         let year = this.year ?? 0
         let month = this.month ?? 0
-        let weekOfYear = this.weekOfYear ?? 0
+        let week = this.weekOfYear ?? 0
         let day = this.day ?? 0
         let hour = this.hour ?? 0
         let minute = this.minute ?? 0
@@ -47,28 +49,35 @@ extension Date {
                 return "\(years) year\(years > 1 ? "s" : "") ago"
             }
             if month < 0 {
-                let months = -month + ((-day % 30) < 15 ? 0 : 1)
-                return "\(months) month\(months > 1 ? "s" : "") ago"
-
+                let months = -month + ((-week % 4) < 2 ? 0 : 1)
+                if months > 11 {
+                    return "1 year ago"
+                } else {
+                    return "\(months) month\(months > 1 ? "s" : "") ago"
+                }
             }
-            if weekOfYear < 0 {
-                let weeks = -weekOfYear + ((-day % 7) < 4 ? 0 : 1)
+            if week < 0 {
+                let weeks = -week + ((-day % 7) < 4 ? 0 : 1)
                 return "\(weeks) week\(weeks > 1 ? "s" : "") ago"
             }
             if day < 0 {
                 let days = -day + ((-hour % 24) < 12 ? 0 : 1)
-                return "\(days) day\(days > 1 ? "s" : "") ago"
+                if days > 6 {
+                    return "1 week ago"
+                } else {
+                    return "\(days) day\(days > 1 ? "s" : "") ago"
+                }
             }
             
             if showTime == false {
                 return relativeDay(to: now)
             } else {
                 if hour < 0 {
-                    let hours = -hour + ((-minute % 60) < 30 ? 0 : 1)
+                    let hours = -hour + ((-minute % 60) <= 30 ? 0 : 1)
                     return "\(hours) hour\(hours > 1 ? "s" : "") ago"
                 }
                 if minute < 0 {
-                    let minutes = -minute + ((-second % 60) < 30 ? 0 : 1)
+                    let minutes = -minute + ((-second % 60) <= 30 ? 0 : 1)
                     return "\(minutes) minute\(minutes > 1 ? "s" : "") ago"
                 }
                 return "Just now"
@@ -80,12 +89,12 @@ extension Date {
                 return "in \(years) year\(years > 1 ? "s" : "")"
             }
             if month > 0 {
-                let months = month + ((day % 30) < 15 ? 0 : 1)
+                let months = month + ((week % 4) < 2 ? 0 : 1)
                 return "in \(months) month\(months > 1 ? "s" : "")"
 
             }
-            if weekOfYear > 0 {
-                let weeks = weekOfYear + ((day % 7) < 4 ? 0 : 1)
+            if week > 0 {
+                let weeks = week + ((day % 7) < 4 ? 0 : 1)
                 return "in \(weeks) week\(weeks > 1 ? "s" : "")"
             }
             if day > 0 {
@@ -101,7 +110,7 @@ extension Date {
                 return relativeDay(to: now)
             } else {
                 if hour > 0 {
-                    let hours = hour + ((minute % 60) < 30 ? 0 : 1)
+                    let hours = hour + ((minute % 60) >= 30 ? 1 : 0)
                     if hours == 24 {
                         return "in 1 day"
                     } else {
@@ -109,7 +118,7 @@ extension Date {
                     }
                 }
                 if minute > 0 {
-                    let minutes = minute + ((second % 60) < 30 ? 0 : 1)
+                    let minutes = minute + ((second % 60) >= 30 ? 1 : 0)
                     if minutes == 60 {
                         return "in 1 hour"
                     } else {

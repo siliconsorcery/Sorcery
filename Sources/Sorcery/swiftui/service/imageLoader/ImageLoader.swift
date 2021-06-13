@@ -47,7 +47,7 @@ public class ImageLoader: ObservableObject {
                         return
                     }
                     guard let data = data else {
-                        Log.warn("No data found")
+                        Log.warning("No data found")
                         return
                     }
                     DispatchQueue.main.async {

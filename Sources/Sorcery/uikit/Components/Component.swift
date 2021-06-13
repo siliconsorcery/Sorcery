@@ -18,7 +18,7 @@ class Component: UIView {
 
     var onCommand: ((Order) -> (Response?))?
 
-    // Refactor onChange to onCommand(), for now allow both and Log.warn()
+    // Refactor onChange to onCommand(), for now allow both and Log.warning()
     var onChange: ((String) -> (Bool))?
 
     // Views
@@ -74,11 +74,11 @@ class Component: UIView {
     }
 
     func show() {
-        Log.warn("Implement in derived class")
+        Log.warning("Implement in derived class")
     }
 
     func willDismiss() {
-        Log.warn("Implement in derived class")
+        Log.warning("Implement in derived class")
     }
 
     // MARK: - Overrides

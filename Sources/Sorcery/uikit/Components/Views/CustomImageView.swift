@@ -23,10 +23,10 @@ class CustomImageView: UIImageView {
 
 		URLSession.shared.dataTask(with: url!) { data, _, error in
 			if (error != nil) {
-				Log.note("CustomImageView: \(String(describing: error))")
+				Log.notice("CustomImageView: \(String(describing: error))")
 				return
 			}
-			Log.warn("BOGUS: Put this on a background thread!")
+			Log.warning("BOGUS: Put this on a background thread!")
 			let imageToCache = UIImage(data: data!)
 			kImageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
 			if (self.imageUrlString == urlString) {

@@ -8,7 +8,8 @@
 
 import UIKit
 
-enum Alert {    
+enum Alert {
+    
     static func show(
         title: String,
         message: String,
@@ -51,7 +52,7 @@ enum Alert {
             viewController.present(alert, animated: true, completion: nil)
             
         } else {
-            Log.warn("Can't use Alert until a rootViewController has been established!")
+            Log.warning("Can't use Alert until a rootViewController has been established!")
         }
     }
 }

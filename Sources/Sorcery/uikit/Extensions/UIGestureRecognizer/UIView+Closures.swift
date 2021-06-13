@@ -41,7 +41,7 @@ public extension UIView {
         tapHandler: @escaping (UITapGestureRecognizer) -> Void,
         doubleTapHandler: @escaping (UITapGestureRecognizer) -> Void
     ) {
-        Log.warn("On advisable due to fail to single tap delay")
+        Log.warning("On advisable due to fail to single tap delay")
 
         self.isUserInteractionEnabled = true
 
@@ -59,7 +59,7 @@ public extension UIView {
         doubleTapHandler: @escaping (UITapGestureRecognizer) -> Void,
         tripleTapHandler: @escaping (UITapGestureRecognizer) -> Void
     ) {
-        Log.warn("On advisable due to fail to single/double tap delays")
+        Log.warning("On advisable due to fail to single/double tap delays")
 
         self.isUserInteractionEnabled = true
 
@@ -81,7 +81,7 @@ public extension UIView {
         doubleTapHandler: @escaping (UITapGestureRecognizer) -> Void,
         tripleTapHandler: @escaping (UITapGestureRecognizer) -> Void
     ) {
-        Log.warn("On advisable due to fail to tap delays")
+        Log.warning("On advisable due to fail to tap delays")
 
         self.isUserInteractionEnabled = true
 

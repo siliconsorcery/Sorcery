@@ -68,7 +68,6 @@ final public class TriFluxStore<MODEL, SERVICE>: ObservableObject {
     ) {
         Log.echo(
             "\(store.id) 📦 \(message)"
-            ,to: .console
             ,funcName: funcName
             ,fileName: fileName
             ,lineNumber: lineNumber

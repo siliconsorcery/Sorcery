@@ -4,6 +4,11 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.57
+
+- Improved Date.relative() ranges
+- Added unit tests for Date_Formatting and TimeInterval_formating
+
 ## 0.0.56
 
 - Add .modifers for .tap .over & .under
