@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Sorcery
 
 class TimeInterval_FormattedTests: XCTestCase {
 

@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.58
+
+- Moved Reflux...README_REFLUX.md to root and excluded it from the Package.swift
+
 ## 0.0.57
 
 - Improved Date.relative() ranges

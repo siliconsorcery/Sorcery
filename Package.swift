@@ -12,7 +12,8 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Sorcery",
-            targets: ["Sorcery"]),
+            targets: ["Sorcery"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,11 +24,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Sorcery",
-            dependencies: []
+            dependencies: [],
+            exclude: ["README_REFLUX.md"]
         ),
         .testTarget(
             name: "SorceryTests",
-            dependencies: ["Sorcery"]
+            dependencies: ["Sorcery"],
+            exclude: ["README_REFLUX.md"]
         ),
     ]
 )

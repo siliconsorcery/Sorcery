@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Sorcery
 
 class DoubleInterpolateTests: XCTestCase {
     
