@@ -4,6 +4,19 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.61
+
+- PseudoId changed formatting a range for time now: xxxTTT 
+- where xxx = number of dates since 1 Jan 2021 and TTT is the day time (24h) in base36
+
+## 0.0.60
+
+- PseudoId seedDate set to '00:00 1 Jan 2021'
+
+## 0.0.59
+
+- Added PseudoId
+
 ## 0.0.58
 
 - Moved Reflux...README_REFLUX.md to root and excluded it from the Package.swift
