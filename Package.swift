@@ -24,13 +24,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Sorcery",
-            dependencies: [],
-            exclude: ["README_REFLUX.md"]
+            dependencies: []
         ),
         .testTarget(
             name: "SorceryTests",
-            dependencies: ["Sorcery"],
-            exclude: ["README_REFLUX.md"]
+            dependencies: ["Sorcery"]
         ),
     ]
 )

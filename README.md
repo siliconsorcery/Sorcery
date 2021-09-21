@@ -4,6 +4,10 @@ Helpers for iOS App development for UIKit and SwiftUI. Built as a library and sh
 
 ## New
 
+## 0.0.63
+
+- iOS 15
+
 ## 0.0.62
 
 - Removed Alert
